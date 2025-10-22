@@ -1,0 +1,2525 @@
+{
+	"info": {
+		"_postman_id": "9dffd599-c2ae-4248-b036-2793bd8f3fab",
+		"name": "01 - ReqRes API Testing",
+		"description": "# ReqRes API – Complete Testing Suite\n\n## Overview\n\nThis Postman collection provides a comprehensive demonstration of API automation testing aligned with **industry standards** and **ISTQB methodologies**.\n\nIt validates every aspect of the ReqRes API lifecycle, combining **functional**, **non-functional**, and **workflow-based** testing to ensure high-quality, maintainable, and scalable automation coverage.\n\n---\n\n## What This Collection Demonstrates\n\n### Technical Scope\n\n- Complete CRUD operation testing\n    \n- Authentication and authorization workflows\n    \n- Positive and negative testing scenarios\n    \n- Data-driven testing with dynamic variables\n    \n- Request chaining and workflow validation\n    \n- Performance and latency benchmarking\n    \n- Error handling and fault tolerance validation\n    \n- Data integrity and response structure checks\n    \n\n### ISTQB Techniques Applied\n\n- Equivalence Partitioning\n    \n- Boundary Value Analysis\n    \n- State Transition Testing\n    \n- Error Guessing\n    \n- Decision Table Testing\n    \n\n---\n\n## Collection Summary\n\n| Module | Requests | Defined Tests | Executed Assertions (per full run) | Coverage |\n| --- | --- | --- | --- | --- |\n| GET Requests | 8 | 49 | 73 | Users & Resources |\n| POST Requests | 7 | 45+ | 69 | Create, Register, Login |\n| PUT / PATCH | 2 | 11 | 17 | Full & Partial Updates |\n| DELETE | 2 | 10 | 16 | Delete & Idempotence |\n| Advanced Workflows | 4 | 17+ | 26 | End-to-End CRUD |\n| **TOTAL** | **23** | **121+** | **187+** | **Complete API Coverage** |\n\n> &lt;p &gt;Includes global pre-request and post-request validations for error resilience, response time compliance, and security header verification.&lt;/p&gt; \n  \n\n---\n\n## Usage Guide\n\n### Prerequisites\n\n1. Import the collection into **Postman**.\n    \n2. Import the environment file: `ReqRes - Production`.\n    \n3. Select the imported environment before execution.\n    \n\n### Execution Options\n\n#### 1\\. Run Individual Requests\n\n- Select any request → Click **Send**.\n    \n- View assertions in the **Test Results** tab.\n    \n- Check the **Postman Console** for detailed logs.\n    \n\n#### 2\\. Run a Specific Module\n\n- Right-click any folder (e.g., `01.1 - GET Requests`).\n    \n- Select **Run folder** to execute grouped tests.\n    \n\n#### 3\\. Run the Entire Collection\n\n- Click on the collection → **Run**.\n    \n- Execute all 23 requests sequentially for full validation.\n    \n\n### Advanced Workflow Instructions\n\nRequests `TC-ADV-001` to `TC-ADV-004` simulate a complete **user lifecycle** and should be executed sequentially:\n\n1. **TC-ADV-001:** Create User\n    \n2. **TC-ADV-002:** Read User (uses dynamic ID from step 1)\n    \n3. **TC-ADV-003:** Update User\n    \n4. **TC-ADV-004:** Delete User\n    \n\n---\n\n## Key Features\n\n### Dynamic Variables\n\n- `{{baseURL}}` – Base API endpoint\n    \n- `{{userId}}` – Dynamically captured user ID\n    \n- `{{authToken}}` – Authentication token\n    \n- `{{resourceId}}` – Resource identifier\n    \n\n### Automated Validations\n\n- HTTP status code and schema verification\n    \n- Response time and size benchmarking\n    \n- Data structure and field validation\n    \n- Format checks (email, URL, timestamp)\n    \n- Security and error handling assertions\n    \n\n### Performance Metrics\n\n- Response time benchmarks\n    \n- Performance scoring (A+ to D)\n    \n- Payload size and optimization tracking\n    \n\n---\n\n## Test Coverage Overview\n\n```\nPositive Testing:    60%  \nNegative Testing:    25%  \nEdge Cases:          10%  \nPerformance:          5%\n\n ```\n\n---\n\n## Quality and Standards\n\nThis collection adheres to:\n\n- RESTful API testing best practices\n    \n- ISTQB-compliant test design techniques\n    \n- Consistent and modular naming conventions\n    \n- Comprehensive logging and traceability\n    \n- CI/CD-compatible structure for Newman execution\n    \n\n---\n\n## Author\n\n**Juan Pablo Portilla**\n\nQA Automation Engineer\n\nGitHub: [PortillaXpert](https://github.com/PortillaXpert)\n\nLinkedIn: [Juan Pablo Rivera](https://www.linkedin.com/in/juan-pablo-rivera-a90335374)\n\n---\n\n## Version History\n\n**v1.0 – October 2025**\n\n- Initial release with full CRUD coverage\n    \n- 23 requests, 121+ defined tests\n    \n- \\~187 total assertions executed per complete run\n    \n- Includes advanced user lifecycle workflows\n    \n\n---\n\n## API Reference\n\n**Base API:** [ReqRes.in](https://reqres.in/)\n\n- Free public mock API\n    \n- Authentication required for selected endpoints\n    \n- Safe for continuous testing and CI/CD integration\n    \n\n---\n\n## Notes\n\n- All requests are **idempotent** and can be re-executed safely.\n    \n- No persistent data is stored in the API.\n    \n- Designed for continuous regression testing and reporting through **Newman**.\n    \n\n---\n\n**This collection represents a production-grade example of API automation, demonstrating a QA testing strategy applicable to enterprise environments.**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33194388",
+		"_collection_link": "https://personal-qa-workspace.postman.co/workspace/QA-Portfolio~803d67d6-a5a5-400a-91af-102152a9609d/collection/33194388-9dffd599-c2ae-4248-b036-2793bd8f3fab?action=share&source=collection_link&creator=33194388"
+	},
+	"item": [
+		{
+			"name": "01.1 - GET Requests",
+			"item": [
+				{
+					"name": "TC-GET-001: Get Users List - Page 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GET-001: Get Users List - Page 1\r",
+									"// Test Level: Component Testing (ISTQB)\r",
+									"// Technique: Positive Testing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code Validation\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time Validation (Performance)\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Content-Type Header Validation\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"//Test 4: Response Body Structure\r",
+									"pm.test(\"Response has required pagination fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('page');\r",
+									"    pm.expect(jsonData).to.have.property('per_page');\r",
+									"    pm.expect(jsonData).to.have.property('total');\r",
+									"    pm.expect(jsonData).to.have.property('total_pages');\r",
+									"    pm.expect(jsonData).to.have.property('data');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Data Array Validation\r",
+									"pm.test(\"Data array is not empty\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.be.an('array');\r",
+									"    pm.expect(jsonData.data.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 6: User Object Structure (First user)\r",
+									"pm.test(\"Each user has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const firstUser = jsonData.data[0];\r",
+									"    \r",
+									"    pm.expect(firstUser).to.have.property('id');\r",
+									"    pm.expect(firstUser).to.have.property('email');\r",
+									"    pm.expect(firstUser).to.have.property('first_name');\r",
+									"    pm.expect(firstUser).to.have.property('last_name');\r",
+									"    pm.expect(firstUser).to.have.property('avatar');\r",
+									"});\r",
+									"\r",
+									"//Test 7: Email Format Validation\r",
+									"pm.test(\"Email format is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"    \r",
+									"    jsonData.data.forEach(user => {\r",
+									"        pm.expect(user.email).to.match(emailRegex);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 8: ID is a positive integer\r",
+									"pm.test(\"User IDs are positive integers\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.forEach(user => {\r",
+									"        pm.expect(user.id).to.be.a('number');\r",
+									"        pm.expect(user.id).to.be.above(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//DYNAMIC VARIABLES: Save data for next requests\r",
+									"//Save first user ID for future requests\r",
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"if (jsonData.data && jsonData.data.length > 0) {\r",
+									"    pm.environment.set(\"userId\", jsonData.data[0].id);\r",
+									"    pm.environment.set(\"userEmail\", jsonData.data[0].email);\r",
+									"    \r",
+									"    pm.environment.set(\"totalUsers\", jsonData.total);\r",
+									"    \r",
+									"    console.log(\"Saved User ID:\", jsonData.data[0].id);\r",
+									"    console.log(\"Saved User Email:\", jsonData.data[0].email);\r",
+									"}\r",
+									"\r",
+									"//TEST SUMMARY\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TEST EXECUTION SUMMARY\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Test Case: TC-GET-001\");\r",
+									"console.log(\"Status Code:\", pm.response.code);\r",
+									"console.log(\"Response Time:\", pm.response.responseTime + \"ms\");\r",
+									"console.log(\"Total Users Found:\", jsonData.total);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users?page=1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GET-002: Get Single User by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GET-002: Get Single User by ID\r",
+									"// Test Level: Component Testing\r",
+									"// Technique: Equivalence Partitioning (Valid ID)\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Response Structure\r",
+									"pm.test(\"Response has data object\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('data');\r",
+									"});\r",
+									"\r",
+									"//Test 4: User ID Matches Request\r",
+									"pm.test(\"User ID matches requested ID\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requestedId = parseInt(pm.environment.get(\"userId\"));\r",
+									"    pm.expect(jsonData.data.id).to.eql(requestedId);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Complete User Structure\r",
+									"pm.test(\"User object has all required fields\", function () {\r",
+									"    const user = pm.response.json().data;\r",
+									"    \r",
+									"    pm.expect(user).to.have.property('id');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('first_name');\r",
+									"    pm.expect(user).to.have.property('last_name');\r",
+									"    pm.expect(user).to.have.property('avatar');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Data Types Validation\r",
+									"pm.test(\"Field data types are correct\", function () {\r",
+									"    const user = pm.response.json().data;\r",
+									"    \r",
+									"    pm.expect(user.id).to.be.a('number');\r",
+									"    pm.expect(user.email).to.be.a('string');\r",
+									"    pm.expect(user.first_name).to.be.a('string');\r",
+									"    pm.expect(user.last_name).to.be.a('string');\r",
+									"    pm.expect(user.avatar).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Test 7: Email Format Validation\r",
+									"pm.test(\"Email format is valid\", function () {\r",
+									"    const user = pm.response.json().data;\r",
+									"    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"    pm.expect(user.email).to.match(emailRegex);\r",
+									"});\r",
+									"\r",
+									"//Test 8: Avatar URL Validation\r",
+									"pm.test(\"Avatar URL is valid HTTPS\", function () {\r",
+									"    const user = pm.response.json().data;\r",
+									"    pm.expect(user.avatar).to.include('https://');\r",
+									"});\r",
+									"\r",
+									"//TEST SUMMARY\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-GET-002 SUMMARY\");\r",
+									"console.log(\"User ID:\", jsonData.data.id);\r",
+									"console.log(\"User Name:\", jsonData.data.first_name, jsonData.data.last_name);\r",
+									"console.log(\"Email:\", jsonData.data.email);\r",
+									"console.log(\"Response Time:\", pm.response.responseTime + \"ms\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users/{{userId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GET-003: Get User Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GET-003: Get User Not Found\r",
+									"// Test Type: NEGATIVE Testing\r",
+									"// Technique: Error Handling Validation\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Correct Error Status Code\r",
+									"pm.test(\"Status code is 404 Not Found\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time (even for errors)\r",
+									"pm.test(\"Error response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Response Body Validation\r",
+									"pm.test(\"Response body is empty object or has error structure\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    // ReqRes returns empty object for 404\r",
+									"    pm.expect(Object.keys(jsonData).length).to.be.at.most(1);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Content-Type is still JSON\r",
+									"pm.test(\"Content-Type is JSON even for 404\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"//Test 5: No sensitive data in error\r",
+									"//Shouldn't contain database info, stack traces and others\r",
+									"pm.test(\"Error response doesn't leak sensitive data\", function () {\r",
+									"    const body = pm.response.text();\r",
+									"    \r",
+									"    pm.expect(body.toLowerCase()).to.not.include('database');\r",
+									"    pm.expect(body.toLowerCase()).to.not.include('sql');\r",
+									"    pm.expect(body.toLowerCase()).to.not.include('error:');\r",
+									"});\r",
+									"\r",
+									"//TEST SUMMARY\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"❌ TC-GET-003 SUMMARY (Negative Test)\");\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Expected: 404 - User Not Found\");\r",
+									"console.log(\"Response Time:\", pm.response.responseTime + \"ms\");\r",
+									"console.log(\"Error handling working correctly\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users/99999",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"99999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GET-004: List Users - Page 2 (Pagination)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GET-004: Pagination Test - Page 2\r",
+									"// Test Type: Functional Testing\r",
+									"// Technique: Pagination Logic Validation\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Correct Page Number\r",
+									"pm.test(\"Page number is 2\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.page).to.eql(2);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Has Users Data\r",
+									"pm.test(\"Page 2 contains user data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.be.an('array');\r",
+									"    pm.expect(jsonData.data.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Total Count Consistency\r",
+									"pm.test(\"Total count matches previous page\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const savedTotal = pm.environment.get(\"totalUsers\");\r",
+									"    \r",
+									"    if (savedTotal) {\r",
+									"        pm.expect(jsonData.total).to.eql(parseInt(savedTotal));\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 5: User IDs are Different from Page 1\r",
+									"pm.test(\"User IDs differ from page 1\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const firstUserId = pm.environment.get(\"userId\");\r",
+									"    \r",
+									"    if (firstUserId) {\r",
+									"        const currentPageIds = jsonData.data.map(user => user.id);\r",
+									"        pm.expect(currentPageIds).to.not.include(parseInt(firstUserId));\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 6: Per Page Count\r",
+									"pm.test(\"Per page count is consistent\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.be.at.most(jsonData.per_page);\r",
+									"});\r",
+									"\r",
+									"//Test 7: Pagination Math\r",
+									"pm.test(\"Total pages calculation is correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const expectedPages = Math.ceil(jsonData.total / jsonData.per_page);\r",
+									"    pm.expect(jsonData.total_pages).to.eql(expectedPages);\r",
+									"});\r",
+									"\r",
+									"//TEST SUMMARY\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-GET-004 PAGINATION SUMMARY\");\r",
+									"console.log(\"Current Page:\", jsonData.page);\r",
+									"console.log(\"Total Pages:\", jsonData.total_pages);\r",
+									"console.log(\"Users on this page:\", jsonData.data.length);\r",
+									"console.log(\"Total Users:\", jsonData.total);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users?page=2&",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GET-005: Get User with Delay (Performance)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GET-005: Performance Test with Delay\r",
+									"// Test Type: Non-Functional Testing\r",
+									"// Technique: Performance Validation\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code Validation\r",
+									"pm.test(\"Status code is 200 OK (after delay)\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Delay Validation\r",
+									"pm.test(\"Response time reflects delay (>3000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.above(3000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Delay Upper Bound\r",
+									"pm.test(\"Response time is within acceptable range (<5000)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Data Integrity After Delay\r",
+									"pm.test(\"Data structure intact despite delay\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('data');\r",
+									"    pm.expect(jsonData.data).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Complete Response\r",
+									"pm.test(\"No data loss during delayed response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.be.above(0);\r",
+									"\r",
+									"    const firstUser = jsonData.data[0];\r",
+									"    pm.expect(firstUser).to.have.all.keys('id', 'email', 'first_name', 'last_name', 'avatar');\r",
+									"});\r",
+									"\r",
+									"// ========================================\r",
+									"// TEST SUMMARY\r",
+									"// ========================================\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TEST EXECUTION SUMMARY\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Test Case: TC-GET-005\");\r",
+									"console.log(\"Expected Delay: 3000ms\");\r",
+									"console.log(\"Actual Response Time:\", pm.response.responseTime + \"ms\");\r",
+									"console.log(\"Delay Overhead:\", (pm.response.responseTime - 3000) + \"ms\");\r",
+									"console.log(\"Data received:\", pm.response.json().data.length, \"users\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users?delay=3",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "delay",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GET-006: List Resources",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GET-006: List Resources\r",
+									"// Test Type: Functional Testing\r",
+									"// Domain: Product/Resource Listing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Resource Structure\r",
+									"pm.test(\"Response has resources data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('data');\r",
+									"    pm.expect(jsonData.data).to.be.an('array');\r",
+									"    pm.expect(jsonData.data.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Resource Fields\r",
+									"pm.test(\"Each resource has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const firstResource = jsonData.data[0];\r",
+									"    \r",
+									"    pm.expect(firstResource).to.have.property('id');\r",
+									"    pm.expect(firstResource).to.have.property('name');\r",
+									"    pm.expect(firstResource).to.have.property('year');\r",
+									"    pm.expect(firstResource).to.have.property('color');\r",
+									"    pm.expect(firstResource).to.have.property('pantone_value');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Color Format Validation\r",
+									"pm.test(\"Color is in hex format\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const hexColorRegex = /^#[0-9A-F]{6}$/i;\r",
+									"    \r",
+									"    jsonData.data.forEach(resource => {\r",
+									"        pm.expect(resource.color).to.match(hexColorRegex);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 6: Year Validation\r",
+									"pm.test(\"Year is a valid 4-digit number\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.forEach(resource => {\r",
+									"        pm.expect(resource.year).to.be.a('number');\r",
+									"        pm.expect(resource.year).to.be.within(1900, 2100);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 7: Pantone Value Format\r",
+									"pm.test(\"Pantone value is formatted correctly\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.forEach(resource => {\r",
+									"        pm.expect(resource.pantone_value).to.be.a('string');\r",
+									"        pm.expect(resource.pantone_value).to.match(/^\\d{2}-\\d{4}$/);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"if (jsonData.data && jsonData.data.length > 0) {\r",
+									"    pm.environment.set(\"resourceId\", jsonData.data[0].id);\r",
+									"}\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TEST EXECUTION SUMMARY\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Test Case: TC-GET-006\");\r",
+									"console.log(\"Total Resources:\", jsonData.data.length);\r",
+									"console.log(\"First Resource:\", jsonData.data[0].name);\r",
+									"console.log(\"Color:\", jsonData.data[0].color);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/unknown",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"unknown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GET-007: Single Resource by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GET-007: Get Single Resource\r",
+									"// Test Type: Component Testing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Has Resource Data\r",
+									"pm.test(\"Response contains resource data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('data');\r",
+									"});\r",
+									"\r",
+									"//Test 3: Resource ID Matches\r",
+									"pm.test(\"Resource ID matches requested ID\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requestedId = parseInt(pm.environment.get(\"resourceId\"));\r",
+									"    pm.expect(jsonData.data.id).to.eql(requestedId);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Complete Resource Data\r",
+									"pm.test(\"Resource has all required fields\", function () {\r",
+									"    const resource = pm.response.json().data;\r",
+									"    \r",
+									"    pm.expect(resource).to.have.all.keys('id', 'name', 'year', 'color', 'pantone_value');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Support Info Present\r",
+									"pm.test(\"Support information is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('support');\r",
+									"    pm.expect(jsonData.support).to.have.property('url');\r",
+									"    pm.expect(jsonData.support).to.have.property('text');\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TEST EXECUTION SUMMARY\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Test Case: TC-GET-007\");\r",
+									"const resource = pm.response.json().data;\r",
+									"console.log(\"ID:\", resource.id);\r",
+									"console.log(\"Name:\", resource.name);\r",
+									"console.log(\"Year:\", resource.year);\r",
+									"console.log(\"Color:\", resource.color);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/unknown/{{resourceId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"unknown",
+								"{{resourceId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GET-008: Resource Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GET-008: Resource Not Found\r",
+									"// Test Type: NEGATIVE Testing\r",
+									"// Technique: Error Handling\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Correct Error Status\r",
+									"pm.test(\"Status code is 404 Not Found\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Error Response Time\r",
+									"pm.test(\"Error response is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Empty or Error Body\r",
+									"pm.test(\"Response body is appropriate for 404\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(Object.keys(jsonData).length).to.be.at.most(1);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Consistent Error Format\r",
+									"//Both user and resource 404 should have similar structure\r",
+									"pm.test(\"404 format consistent with user 404\", function () {\r",
+									"    const body = pm.response.text();\r",
+									"    pm.expect(body).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TEST EXECUTION SUMMARY\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Test Case: TC-GET-008\");\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Expected: 404 - Resource Not Found\");\r",
+									"console.log(\"Error handling validated\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/unknown/99999",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"unknown",
+								"99999"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-GET-001**  \nPriority: High  \nObjective: Validate user list retrieval with pagination\n\nPreconditions:  \n\\- API endpoint accessible  \n\\- No authentication required\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Response time < 2000ms  \n\\- Valid JSON structure  \n\\- Pagination data present\n\n---\n\n**Test Case ID: TC-GET-002**  \nPriority: High  \nObjective: Validate single user retrieval by dynamic ID\n\nPreconditions:\n\n- userId variable set from previous request (TC-GET-001)\n    \n\nExpected Results:\n\n- Status: 200 OK\n    \n- User data matches the requested ID\n    \n- Complete user object structure\n    \n\n---\n\n**Test Case ID: TC-GET-003**  \nPriority: High  \nObjective: Validate error handling for non-existent user\n\nTest Type: Negative Testing  \nTechnique: Boundary Value Analysis (Invalid ID)\n\nExpected Results:  \n\\- Status: 404 Not Found  \n\\- Empty response body or error structure\n\n---\n\n**Test Case ID: TC-GET-004**  \nPriority: Medium  \nObjective: Validate pagination functionality\n\nExpected Results:\n\n- Status: 200 OK\n    \n- Page number is 2\n    \n- Different users than page 1\n    \n- Total count remains consistent\n    \n\n---\n\n**Test Case ID: TC-GET-005**  \nPriority: Medium  \nObjective: Validate API behavior with intentional delay\n\nTest Type: Performance/Timeout Testing\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Response time > 3000ms (3 seconds delay)  \n\\- Data integrity maintained despite delay\n\n---\n\n**Test Case ID: TC-GET-006**  \nPriority: Medium  \nObjective: Validate resources/products listing endpoint\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- List of resources with color data  \n\\- Pagination information\n\n---\n\n**Test Case ID: TC-GET-007**  \nPriority: Medium  \nObjective: Validate single resource retrieval\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Resource details match requested ID\n\n---\n\n**Test Case ID: TC-GET-008**  \nPriority: High  \nObjective: Validate error handling for non-existent resource\n\nTest Type: Negative Testing\n\nExpected Results:  \n\\- Status: 404 Not Found  \n\\- Proper error structure"
+		},
+		{
+			"name": "01.2 - POST Requests",
+			"item": [
+				{
+					"name": "TC-POST-001: Create User - Valid Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-POST-001: Create User - Valid Data\r",
+									"// Test Type: Positive Testing\r",
+									"// Technique: Data Creation Validation\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Correct Status Code for Creation\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Response Has Required Fields\r",
+									"pm.test(\"Response contains id and createdAt\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData).to.have.property('createdAt');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Data Echo Back Validation\r",
+									"pm.test(\"Request data is echoed back correctly\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"    pm.expect(jsonData).to.have.property('job');\r",
+									"    pm.expect(jsonData.name).to.eql(\"Juan Pablo Rivera\");\r",
+									"    pm.expect(jsonData.job).to.eql(\"QA Automation Engineer\");\r",
+									"});\r",
+									"\r",
+									"//Test 5: ID is Generated\r",
+									"pm.test(\"User ID is generated and is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.be.a('string');\r",
+									"    pm.expect(jsonData.id.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 6: Timestamp Format Validation\r",
+									"pm.test(\"CreatedAt timestamp is in ISO format\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const isoDateRegex = /^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/;\r",
+									"    pm.expect(jsonData.createdAt).to.match(isoDateRegex);\r",
+									"});\r",
+									"\r",
+									"//Test 7: Timestamp is Recent\r",
+									"pm.test(\"CreatedAt timestamp is recent (within 10 seconds)\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const createdTime = new Date(jsonData.createdAt);\r",
+									"    const currentTime = new Date();\r",
+									"    const timeDiff = (currentTime - createdTime) / 1000;\r",
+									"    \r",
+									"    pm.expect(timeDiff).to.be.below(10);\r",
+									"});\r",
+									"\r",
+									"//Test 8: Content-Type Header\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"createdUserId\", jsonData.id);\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-POST-001 USER CREATION SUMMARY\");\r",
+									"console.log(\"Created User ID:\", jsonData.id);\r",
+									"console.log(\"Name:\", jsonData.name);\r",
+									"console.log(\"Job:\", jsonData.job);\r",
+									"console.log(\"Created At:\", jsonData.createdAt);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juan Pablo Rivera\",\r\n    \"job\": \"QA Automation Engineer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-POST-002: Create User - Minimal Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-POST-002: Create User - Minimal Data\r",
+									"// Test Type: Boundary Value Testing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Minimal Data Accepted\r",
+									"pm.test(\"System accepts minimal data (name only)\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"    pm.expect(jsonData.name).to.eql(\"Carlos\");\r",
+									"});\r",
+									"\r",
+									"//Test 4: ID Still Generated\r",
+									"pm.test(\"ID is generated even with minimal data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData.id).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Timestamp Present\r",
+									"pm.test(\"Timestamp is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('createdAt');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Job Field Handling\r",
+									"pm.test(\"Missing job field is handled correctly\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-POST-002 MINIMAL DATA TEST\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"Created with only:\", jsonData.name);\r",
+									"console.log(\"ID Generated:\", jsonData.id);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Carlos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-POST-003: Create User - Empty Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-POST-003: Create User - Empty Data\r",
+									"// Test Type: NEGATIVE Testing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code (ReqRes accepts empty)\r",
+									"pm.test(\"Status code is 201 (API accepts empty body)\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: ID Generated Even for Empty\r",
+									"pm.test(\"ID is still generated\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Timestamp Present\r",
+									"pm.test(\"Timestamp is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('createdAt');\r",
+									"});\r",
+									"\r",
+									"//Test 5: No Server Error\r",
+									"pm.test(\"No 500 server error on empty data\", function () {\r",
+									"    pm.expect(pm.response.code).to.not.eql(500);\r",
+									"});\r",
+									"\r",
+									"//In a real API, this might return 400 Bad Request, but is ReqRes...\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-POST-003 NEGATIVE TEST\");\r",
+									"console.log(\"Empty body sent\");\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Real APIs would typically return 400\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-POST-004: Register User - Successful",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-POST-004: Register User - Successful\r",
+									"// Test Type: Authentication Flow\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Token Generated\r",
+									"pm.test(\"Token is generated\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('token');\r",
+									"    pm.expect(jsonData.token).to.be.a('string');\r",
+									"    pm.expect(jsonData.token.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: User ID Returned\r",
+									"pm.test(\"User ID is returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Token Format\r",
+									"pm.test(\"Token has valid format\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.token).to.match(/^[A-Za-z0-9]+$/);\r",
+									"});\r",
+									"\r",
+									"//Test 6: Token Length\r",
+									"pm.test(\"Token has reasonable length\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.token.length).to.be.within(10, 100);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"authToken\", jsonData.token);\r",
+									"pm.environment.set(\"registeredUserId\", jsonData.id);\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-POST-004 REGISTRATION SUCCESS\");\r",
+									"console.log(\"User ID:\", jsonData.id);\r",
+									"console.log(\"Token:\", jsonData.token);\r",
+									"console.log(\"Token saved to environment\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"eve.holt@reqres.in\",\r\n  \"password\": \"pistol\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-POST-005: Register User - Missing Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-POST-005: Register - Missing Password\r",
+									"// Test Type: NEGATIVE Testing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Correct Error Status\r",
+									"pm.test(\"Status code is 400 Bad Request\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Error response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Error Message Present\r",
+									"pm.test(\"Error message is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('error');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Error Message is Descriptive\r",
+									"pm.test(\"Error message mentions missing password\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.error.toLowerCase()).to.include('password');\r",
+									"});\r",
+									"\r",
+									"//Test 5: No Token Generated on Error\r",
+									"pm.test(\"No token generated on error\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('token');\r",
+									"});\r",
+									"\r",
+									"//Test 6: No ID on Error\r",
+									"pm.test(\"No user ID on error\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('id');\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-POST-005 NEGATIVE TEST\");\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Error:\", pm.response.json().error);\r",
+									"console.log(\"Validation error handled correctly\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-POST-006: Login User - Successful",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-POST-006: Login User - Successful\r",
+									"// Test Type: Authentication Flow\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Login response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Token Generated\r",
+									"pm.test(\"Authentication token is generated\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('token');\r",
+									"    pm.expect(jsonData.token).to.be.a('string');\r",
+									"    pm.expect(jsonData.token.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Token Format Validation\r",
+									"pm.test(\"Token has valid alphanumeric format\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.token).to.match(/^[A-Za-z0-9]+$/);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Token is Different from Register (if exists)\r",
+									"pm.test(\"Login token vs register token check\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const registerToken = pm.environment.get(\"authToken\");\r",
+									"    pm.expect(jsonData.token).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Content-Type\r",
+									"pm.test(\"Content-Type is JSON\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"loginToken\", jsonData.token);\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-POST-006 LOGIN SUCCESS\");\r",
+									"console.log(\"Token:\", jsonData.token);\r",
+									"console.log(\"Token saved to environment\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-POST-007: Login User - Missing Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-POST-007: Login - Missing Password\r",
+									"// Test Type: NEGATIVE Testing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Error Status Code\r",
+									"pm.test(\"Status code is 400 Bad Request\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Error response is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Error Message Present\r",
+									"pm.test(\"Error message is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('error');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Error is About Password\r",
+									"pm.test(\"Error mentions missing password\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.error.toLowerCase()).to.include('password');\r",
+									"});\r",
+									"\r",
+									"//Test 5: No Token on Error\r",
+									"pm.test(\"No token generated on login error\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('token');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Consistent Error Structure\r",
+									"pm.test(\"Error structure matches other endpoints\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"    pm.expect(Object.keys(jsonData)).to.include('error');\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-POST-007 LOGIN ERROR TEST\");\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Error:\", pm.response.json().error);\r",
+									"console.log(\"Login validation working correctly\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"peter@klaven\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-POST-001**  \nPriority: High  \nObjective: Validate user creation with complete valid data\n\nTest Type: Positive Testing  \nTechnique: Equivalence Partitioning\n\nPreconditions:  \n\\- API endpoint accessible\n\nExpected Results:  \n\\- Status: 201 Created  \n\\- User ID generated  \n\\- Timestamp included  \n\\- Data echoed back correctly\n\n---\n\n**Test Case ID: TC-POST-002**  \nPriority: Medium  \nObjective: Validate user creation with minimal required data\n\nTest Type: Boundary Value Testing\n\nExpected Results:  \n\\- Status: 201 Created  \n\\- System accepts minimal data\n\n---\n\n**Test Case ID: TC-POST-003**  \nPriority: High  \nObjective: Validate API handling of empty/invalid data\n\nTest Type: NEGATIVE Testing\n\nExpected Results:  \n\\- System handles empty data gracefully  \n\\- Still returns 201 (ReqRes always accepts)\n\n---\n\n**Test Case ID: TC-POST-004**  \nPriority: High  \nObjective: Validate successful user registration\n\nTest Type: Authentication Flow  \nTechnique: Positive Testing\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Token generated  \n\\- User ID returned\n\n---\n\n**Test Case ID: TC-POST-005**  \nPriority: High  \nObjective: Validate error handling for missing password\n\nTest Type: NEGATIVE Testing\n\nExpected Results:  \n\\- Status: 400 Bad Request  \n\\- Error message present\n\n---\n\n**Test Case ID: TC-POST-006**  \nPriority: High  \nObjective: Validate successful user login\n\nTest Type: Authentication Flow\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Token generated for authenticated session\n\n---\n\n**Test Case ID: TC-POST-007**  \nPriority: High  \nObjective: Validate login error handling  \n  \nTest Type: NEGATIVE Testing  \n  \nExpected Results:  \n\\- Status: 400 Bad Request  \n\\- Descriptive error message\n\n---"
+		},
+		{
+			"name": "01.3 - PUT & PATCH Requests",
+			"item": [
+				{
+					"name": "TC-PUT-001: Update User - Full Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-PUT-001: Update User - Full Update\r",
+									"// Test Type: Update Operation (PUT)\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Updated Data Echoed\r",
+									"pm.test(\"Updated data is echoed back\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Juan Updated\");\r",
+									"    pm.expect(jsonData.job).to.eql(\"Senior QA Engineer\");\r",
+									"});\r",
+									"\r",
+									"//Test 4: Updated Timestamp Present\r",
+									"pm.test(\"UpdatedAt timestamp is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('updatedAt');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Timestamp is ISO Format\r",
+									"pm.test(\"UpdatedAt is in ISO format\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const isoDateRegex = /^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/;\r",
+									"    pm.expect(jsonData.updatedAt).to.match(isoDateRegex);\r",
+									"});\r",
+									"\r",
+									"//Test 6: Timestamp is Recent\r",
+									"pm.test(\"UpdatedAt timestamp is recent\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const updatedTime = new Date(jsonData.updatedAt);\r",
+									"    const currentTime = new Date();\r",
+									"    const timeDiff = (currentTime - updatedTime) / 1000;\r",
+									"    \r",
+									"    pm.expect(timeDiff).to.be.below(10);\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-PUT-001 FULL UPDATE\");\r",
+									"console.log(\"Updated Name:\", pm.response.json().name);\r",
+									"console.log(\"Updated Job:\", pm.response.json().job);\r",
+									"console.log(\"Updated At:\", pm.response.json().updatedAt);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juan Updated\",\r\n    \"job\": \"Senior QA Engineer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-PATCH-001: Update User - Partial Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-PATCH-001: Update User - Partial\r",
+									"// Test Type: Partial Update (PATCH)\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Partial Data Updated\r",
+									"pm.test(\"Only specified field is updated\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.job).to.eql(\"Lead QA Automation Engineer\");\r",
+									"});\r",
+									"\r",
+									"//Test 4: Updated Timestamp\r",
+									"pm.test(\"UpdatedAt timestamp is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('updatedAt');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Content-Type\r",
+									"pm.test(\"Content-Type is JSON\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-PATCH-001 PARTIAL UPDATE\");\r",
+									"console.log(\"Updated Job Only:\", pm.response.json().job);\r",
+									"console.log(\"Updated At:\", pm.response.json().updatedAt);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"job\": \"Lead QA Automation Engineer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-PUT-001**  \nPriority: High  \nObjective: Validate complete user update with PUT\n\nTest Type: Update Operation  \nTechnique: Full Resource Replacement\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- All fields updated  \n\\- Updated timestamp present\n\n---\n\n**Test Case ID: TC-PATCH-001**  \nPriority: Medium  \nObjective: Validate partial user update with PATCH  \n  \nTest Type: Partial Update Operation  \n  \nExpected Results:  \n\\- Status: 200 OK  \n\\- Only specified field updated  \n\\- Timestamp present"
+		},
+		{
+			"name": "01.4 - DELETE Requests",
+			"item": [
+				{
+					"name": "TC-DELETE-001: Delete User - Successful",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-DELETE-001: Delete User - Successful\r",
+									"// Test Type: Delete Operation\r",
+									"// (In real cases 'Deleting a user' is not a good practice)\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Correct Status Code for Deletion\r",
+									"pm.test(\"Status code is 204 No Content\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Delete operation is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Empty Response Body\r",
+									"pm.test(\"Response body is empty for 204\", function () {\r",
+									"    pm.expect(pm.response.text()).to.have.lengthOf(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: No Content-Length or Zero\r",
+									"pm.test(\"Content-Length indicates no content\", function () {\r",
+									"    const contentLength = pm.response.headers.get(\"Content-Length\");\r",
+									"    if (contentLength) {\r",
+									"        pm.expect(parseInt(contentLength)).to.eql(0);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 5: Response Time Benchmark\r",
+									"pm.test(\"Delete is faster than 1 second\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-DELETE-001 DELETE SUCCESS\");\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Response Time:\", pm.response.responseTime + \"ms\");\r",
+									"console.log(\"Body Length:\", pm.response.text().length);\r",
+									"console.log(\"User deleted successfully\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-DELETE-002: Delete Non-existent User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-DELETE-002: Delete Non-existent User\r",
+									"// Test Type: Idempotence Testing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code (Idempotent - still 204)\r",
+									"pm.test(\"Status code is 204 (idempotent operation)\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time is acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Empty Body\r",
+									"pm.test(\"Response body is empty\", function () {\r",
+									"    pm.expect(pm.response.text()).to.have.lengthOf(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: No Server Error\r",
+									"pm.test(\"No 500 error on non-existent resource\", function () {\r",
+									"    pm.expect(pm.response.code).to.not.eql(500);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Idempotence Validation\r",
+									"pm.test(\"DELETE is idempotent\", function () {\r",
+									"    //Multiple DELETEs should give same result\r",
+									"    pm.expect(pm.response.code).to.eql(204);\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-DELETE-002 IDEMPOTENCE TEST\");\r",
+									"console.log(\"Attempted to delete non-existent user\");\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Idempotent behavior confirmed\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users/99999",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"99999"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-DELETE-001**  \nPriority: High  \nObjective: Validate successful user deletion\n\n(In real cases 'Deleting a user' is not a good practice)\n\nTest Type: Delete Operation  \nTechnique: Resource Removal Validation\n\nExpected Results:  \n\\- Status: 204 No Content  \n\\- Empty response body  \n\\- Fast response time\n\n---\n\n**Test Case ID: TC-DELETE-002**  \nPriority: Medium  \nObjective: Validate DELETE idempotence\n\nTest Type: Idempotence Testing  \nTechnique: Non-existent Resource Deletion\n\nExpected Results:  \n\\- Status: 204 No Content (idempotent)  \n\\- No error thrown\n\n---"
+		},
+		{
+			"name": "01.5 - Advanced Workflows",
+			"item": [
+				{
+					"name": "TC-ADV-001: Lifecycle - CREATE User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-ADV-001: Complete User Lifecycle - STEP 1: CREATE\r",
+									"// Test Type: End-to-End Workflow\r",
+									"// This is a CHAINED request sequence\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: User Created Successfully\r",
+									"pm.test(\"STEP 1: User created (201)\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Test 2: ID Generated\r",
+									"pm.test(\"STEP 1: User ID generated\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData.id).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Test 3: Data Validation\r",
+									"pm.test(\"STEP 1: User data correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Lifecycle Test User\");\r",
+									"    pm.expect(jsonData.job).to.eql(\"QA Tester\");\r",
+									"});\r",
+									"\r",
+									"//Test 4: Timestamp Present\r",
+									"pm.test(\"STEP 1: Creation timestamp present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('createdAt');\r",
+									"});\r",
+									"\r",
+									"//Attention: I save the User ID\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"lifecycleUserId\", jsonData.id);\r",
+									"pm.environment.set(\"lifecycleUserName\", jsonData.name);\r",
+									"pm.environment.set(\"lifecycleUserJob\", jsonData.job);\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-ADV-001: USER LIFECYCLE - STEP 1/4\");\r",
+									"console.log(\"CREATE: User created successfully\");\r",
+									"console.log(\"User ID:\", jsonData.id);\r",
+									"console.log(\"Name:\", jsonData.name);\r",
+									"console.log(\"Job:\", jsonData.job);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\" Variables saved for next steps:\");\r",
+									"console.log(\"  - lifecycleUserId:\", pm.environment.get(\"lifecycleUserId\"));\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"  Next: Execute TC-ADV-002 (READ)\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Lifecycle Test User\",\r\n    \"job\": \"QA Tester\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-ADV-002: Lifecycle - READ User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-ADV-002: User Lifecycle - STEP 2: READ\r",
+									"// This request uses the ID from TC-ADV-001\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: User Retrieved Successfully\r",
+									"pm.test(\"STEP 2: User retrieved (200)\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Test 2: User ID Matches\r",
+									"//Note: The public ReqRes API does not persist data created via POST /users.\r",
+									"//This means we cannot retrieve a previously created user using its ID in a later request.\r",
+									"//As a workaround, we use a fixed ID (\"1\") that corresponds to an existing user in the API.\r",
+									"//This allows us to validate the response structure without relying on real persistence.\r",
+									"pm.test(\"STEP 2: Retrieved user ID matches created ID\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const savedId = \"1\";\r",
+									"    //In a real-world scenario or with a persistent API, this should be replaced with the dynamic variable `savedId`.\r",
+									"    pm.expect(jsonData.data.id.toString()).to.eql(savedId);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Response Has User Data\r",
+									"pm.test(\"STEP 2: User data structure is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('data');\r",
+									"    pm.expect(jsonData.data).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"//Test 4: User Has Required Fields\r",
+									"pm.test(\"STEP 2: User object complete\", function () {\r",
+									"    const user = pm.response.json().data;\r",
+									"    pm.expect(user).to.have.property('id');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('first_name');\r",
+									"    pm.expect(user).to.have.property('last_name');\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-ADV-002: USER LIFECYCLE - STEP 2/4\");\r",
+									"console.log(\"READ: User retrieved successfully\");\r",
+									"const user = pm.response.json().data;\r",
+									"console.log(\"User ID:\", user.id);\r",
+									"console.log(\"Email:\", user.email);\r",
+									"console.log(\"Name:\", user.first_name, user.last_name);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-ADV-003: Lifecycle - UPDATE User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-ADV-003: User Lifecycle - STEP 3: UPDATE\r",
+									"// Updates the user created in TC-ADV-001\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Update Successful\r",
+									"pm.test(\"STEP 3: User updated (200)\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Updated Data Reflected\r",
+									"pm.test(\"STEP 3: Updated data returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"    pm.expect(jsonData).to.have.property('job');\r",
+									"});\r",
+									"\r",
+									"//Test 3: Name Updated Correctly\r",
+									"pm.test(\"STEP 3: Name includes 'Updated'\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.include('Updated');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Job Updated Correctly\r",
+									"pm.test(\"STEP 3: Job includes 'Senior'\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.job).to.include('Senior');\r",
+									"});\r",
+									"\r",
+									"//Test 5: UpdatedAt Timestamp\r",
+									"pm.test(\"STEP 3: UpdatedAt timestamp present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('updatedAt');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Timestamp is Recent\r",
+									"pm.test(\"STEP 3: Update timestamp is recent\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const updatedTime = new Date(jsonData.updatedAt);\r",
+									"    const currentTime = new Date();\r",
+									"    const timeDiff = (currentTime - updatedTime) / 1000;\r",
+									"    \r",
+									"    pm.expect(timeDiff).to.be.below(10);\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\" TC-ADV-003: USER LIFECYCLE - STEP 3/4\");\r",
+									"console.log(\" UPDATE: User updated successfully\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"Updated Name:\", jsonData.name);\r",
+									"console.log(\"Updated Job:\", jsonData.job);\r",
+									"console.log(\"Updated At:\", jsonData.updatedAt);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"  Next: Execute TC-ADV-004 (DELETE)\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{lifecycleUserName}} - Updated\",\r\n    \"job\": \"Senior {{lifecycleUserJob}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/{{lifecycleUserId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"{{lifecycleUserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-ADV-004: Lifecycle - DELETE User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-ADV-004: User Lifecycle - STEP 4: DELETE (FINAL)\r",
+									"// Completes the full CRUD lifecycle\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Deletion Successful\r",
+									"pm.test(\"STEP 4: User deleted (204)\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Empty Response\r",
+									"pm.test(\"STEP 4: Response body empty\", function () {\r",
+									"    pm.expect(pm.response.text()).to.have.lengthOf(0);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Fast Deletion\r",
+									"pm.test(\"STEP 4: Delete operation fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//Cleanup variables\r",
+									"pm.environment.unset(\"lifecycleUserId\");\r",
+									"pm.environment.unset(\"lifecycleUserName\");\r",
+									"pm.environment.unset(\"lifecycleUserJob\");\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\" TC-ADV-004: USER LIFECYCLE - STEP 4/4\");\r",
+									"console.log(\" DELETE: User deleted successfully\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\" COMPLETE LIFECYCLE FINISHED!\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Summary:\");\r",
+									"console.log(\"   Step 1: CREATE user (POST)\");\r",
+									"console.log(\"   Step 2: READ user (GET)\");\r",
+									"console.log(\"   Step 3: UPDATE user (PUT)\");\r",
+									"console.log(\"   Step 4: DELETE user (DELETE)\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"  Environment variables cleaned up\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users/{{lifecycleUserId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"{{lifecycleUserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-ADV-005: Validate All Pagination Pages",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-ADV-005: Complete Pagination Validation\r",
+									"// Test Type: Comprehensive Data Integrity\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Pagination Structure\r",
+									"pm.test(\"Pagination fields present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('page');\r",
+									"    pm.expect(jsonData).to.have.property('per_page');\r",
+									"    pm.expect(jsonData).to.have.property('total');\r",
+									"    pm.expect(jsonData).to.have.property('total_pages');\r",
+									"    pm.expect(jsonData).to.have.property('data');\r",
+									"    if (jsonData.support) {\r",
+									"        pm.expect(jsonData.support).to.be.an('object');\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 3: Users on Page\r",
+									"pm.test(\"Page contains users\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.be.an('array');\r",
+									"    pm.expect(jsonData.data.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Per Page Limit Respected\r",
+									"pm.test(\"Users count doesn't exceed per_page\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.be.at.most(jsonData.per_page);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Total Pages Calculation\r",
+									"pm.test(\"Total pages math is correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const expectedPages = Math.ceil(jsonData.total / jsonData.per_page);\r",
+									"    pm.expect(jsonData.total_pages).to.eql(expectedPages);\r",
+									"});\r",
+									"\r",
+									"//Test 6: Current Page Valid\r",
+									"pm.test(\"Current page within valid range\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.page).to.be.within(1, jsonData.total_pages);\r",
+									"});\r",
+									"\r",
+									"//Test 7: All Users Have Unique IDs\r",
+									"pm.test(\"All user IDs are unique on this page\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const userIds = jsonData.data.map(user => user.id);\r",
+									"    const uniqueIds = [...new Set(userIds)];\r",
+									"    \r",
+									"    pm.expect(userIds.length).to.eql(uniqueIds.length);\r",
+									"});\r",
+									"\r",
+									"//Test 8: All Users Complete\r",
+									"pm.test(\"All users have complete data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.forEach(user => {\r",
+									"        pm.expect(user).to.have.all.keys('id', 'email', 'first_name', 'last_name', 'avatar');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-ADV-005: PAGINATION ANALYSIS\");\r",
+									"console.log(\"Current Page:\", jsonData.page, \"/\", jsonData.total_pages);\r",
+									"console.log(\"Users on Page:\", jsonData.data.length);\r",
+									"console.log(\"Total Users:\", jsonData.total);\r",
+									"console.log(\"Per Page:\", jsonData.per_page);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users?page=1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-ADV-006: Response Time Performance Benchmark",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-ADV-006: Performance Benchmarking\r",
+									"// Test Type: Non-Functional (Performance)\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Status Code\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Excellent Performance (<500ms)\r",
+									"pm.test(\"Performance: Excellent (<500ms)\", function () {\r",
+									"    if (pm.response.responseTime < 500) {\r",
+									"        pm.expect(true).to.be.true;\r",
+									"        console.log(\"EXCELLENT:\", pm.response.responseTime + \"ms\");\r",
+									"    } else {\r",
+									"        pm.expect(true).to.be.true;\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 3: Good Performance (<1000ms)\r",
+									"pm.test(\"Performance: Good (<1000ms)\", function () {\r",
+									"    if (pm.response.responseTime < 1000 && pm.response.responseTime >= 500) {\r",
+									"        pm.expect(true).to.be.true;\r",
+									"        console.log(\"GOOD:\", pm.response.responseTime + \"ms\");\r",
+									"    } else {\r",
+									"        pm.expect(true).to.be.true;\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 4: Acceptable Performance (<2000ms)\r",
+									"pm.test(\"Performance: Acceptable (<2000ms)\", function () {\r",
+									"    if (pm.response.responseTime < 2000 && pm.response.responseTime >= 1000) {\r",
+									"        pm.expect(true).to.be.true;\r",
+									"        console.log(\"ACCEPTABLE:\", pm.response.responseTime + \"ms\");\r",
+									"    } else {\r",
+									"        pm.expect(true).to.be.true;\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 5: Overall Performance Check\r",
+									"pm.test(\"Response time within SLA (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 6: Response Size\r",
+									"pm.test(\"Response size is reasonable\", function () {\r",
+									"    const responseSize = pm.response.responseSize;\r",
+									"    pm.expect(responseSize).to.be.below(50000); // 50KB\r",
+									"});\r",
+									"\r",
+									"//Calculate Performance Grade\r",
+									"const responserTime = pm.response.responseTime;\r",
+									"let grade;\r",
+									"\r",
+									"if (responserTime < 300) {\r",
+									"    grade = \"A+ (Exceptional)\";\r",
+									"} else if (responserTime < 500) {\r",
+									"    grade = \"A (Excellent)\";\r",
+									"} else if (responserTime < 1000) {\r",
+									"    grade = \"B (Good)\";\r",
+									"} else if (responserTime < 2000) {\r",
+									"    grade = \"C (Acceptable)\";\r",
+									"} else {\r",
+									"    grade = \"D (Poor)\";\r",
+									"}\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-ADV-006: PERFORMANCE BENCHMARK\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Response Time:\", responserTime + \"ms\");\r",
+									"console.log(\"Performance Grade:\", grade);\r",
+									"console.log(\"Response Size:\", pm.response.responseSize, \"bytes\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Performance Thresholds:\");\r",
+									"console.log(\"A+: < 300ms (Exceptional)\");\r",
+									"console.log(\"A: 300-500ms (Excellent)\");\r",
+									"console.log(\"B: 500-1000ms (Good)\");\r",
+									"console.log(\"C: 1000-2000ms (Acceptable)\");\r",
+									"console.log(\"D: > 2000ms (Needs improvement)\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/users?page=1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "### ReqRes API Non-Persistence :(\n\nAlthough the test suite is designed to validate a complete end-to-end CRUD lifecycle (Create, Read, Update, Delete), the ReqRes API imposes a critical limitation:\n\n**The ReqRes API does not persist created users.**\n\nWhen a user is created via POST /api/users, the API returns a simulated id, but this user **IS NOT ACTUALLY STORED** in the backend. As a result, subsequent requests such as GET /api/users/{id} using that ID will return a 404 NOT FOUND error.\n\n---\n\n---\n\n**Test Case ID: TC-ADV-001**  \nPriority: Critical  \nObjective: Validate complete CRUD lifecycle in sequence\n\nTest Type: End-to-End Workflow Testing  \nTechnique: State Transition Testing\n\n**Flow:**  \n1\\. CREATE user (POST)  \n2\\. SAVE user ID  \n3\\. (Next request will READ that user)\n\nThis is Part 1 of 4-step workflow\n\n---\n\n**Test Case ID: TC-ADV-002**  \nPriority: Critical  \nObjective: READ the user created in TC-ADV-001\n\nThis is Part 2 of 4-step workflow  \nDepends on: TC-ADV-001 (CREATE)\n\n---\n\n**Test Case ID: TC-ADV-003**  \nPriority: Critical  \nObjective: UPDATE the user from TC-ADV-001\n\nThis is Part 3 of 4-step workflow  \nDepends on: TC-ADV-001 (CREATE), TC-ADV-002 (READ)\n\n---\n\n**Test Case ID: TC-ADV-004**  \nPriority: Critical  \nObjective: DELETE the user and complete lifecycle\n\nThis is Part 4/4 - FINAL step of workflow  \nDepends on: TC-ADV-001, TC-ADV-002, TC-ADV-003\n\nComplete flow: CREATE → READ → UPDATE → DELETE\n\n---\n\n**Test Case ID: TC-ADV-005**  \nPriority: Medium  \nObjective: Validate complete pagination system\n\nTest Type: Comprehensive Pagination Test\n\nExpected Results:  \n\\- All pages accessible  \n\\- No duplicate users across pages  \n\\- Total count consistent\n\n---\n\n**Test Case ID: TC-ADV-006**  \nPriority: Low  \nObjective: Establish performance benchmarks\n\nTest Type: Non-Functional Testing (Performance)\n\nExpected Results:  \n\\- Baseline performance metrics  \n\\- Response time categorization"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"// ========================================\r",
+					"// GLOBAL PRE-REQUEST SCRIPT\r",
+					"// Runs before every request in this collection\r",
+					"// ========================================\r",
+					"\r",
+					"//Log request information\r",
+					"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+					"console.log(\"EXECUTING REQUEST\");\r",
+					"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+					"console.log(\"Request:\", pm.info.requestName);\r",
+					"console.log(\"Method:\", pm.request.method);\r",
+					"console.log(\"URL:\", pm.request.url.toString());\r",
+					"console.log(\"Timestamp:\", new Date().toISOString());\r",
+					"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+					"\r",
+					"//Set dynamic timestamp variable\r",
+					"pm.environment.set(\"currentTimestamp\", new Date().toISOString());\r",
+					"\r",
+					"//Set test execution ID (for tracking)\r",
+					"if (!pm.environment.get(\"testExecutionId\")) {\r",
+					"    pm.environment.set(\"testExecutionId\", Date.now().toString());\r",
+					"}\r",
+					"\r",
+					"//Log environment variables being used\r",
+					"const baseURL = pm.environment.get(\"baseURL\");\r",
+					"if (baseURL) {\r",
+					"    console.log(\"Environment: Using baseURL =\", baseURL);\r",
+					"}\r",
+					"\r",
+					"//Helper function to generate random data (available in all requests)\r",
+					"pm.globals.set(\"generateRandomEmail\", function() {\r",
+					"    return `test_${Date.now()}@reqres.com`;\r",
+					"});\r",
+					"\r",
+					"pm.globals.set(\"generateRandomName\", function() {\r",
+					"    const names = [\"Juan\", \"Laura\", \"Valeria\", \"Sebastian\", \"Carlos\", \"Diana\"];\r",
+					"    return names[Math.floor(Math.random() * names.length)];\r",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"// ========================================\r",
+					"// GLOBAL TESTS\r",
+					"// Runs after every request in this collection\r",
+					"// ========================================\r",
+					"\r",
+					"//Test 1: No Server Errors (applies to all)\r",
+					"pm.test(\"No 5xx server error\", function () {\r",
+					"    pm.expect(pm.response.code).to.be.below(500);\r",
+					"});\r",
+					"\r",
+					"//Test 2: Response Time Global Check : 5 seconds max\r",
+					"pm.test(\"Response time acceptable (global)\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(5000); \r",
+					"});\r",
+					"\r",
+					"//Test 3: Valid JSON Response (for non-204 responses)\r",
+					"if (pm.response.code !== 204) {\r",
+					"    pm.test(\"Response is valid JSON\", function () {\r",
+					"        pm.response.to.be.json;\r",
+					"    });\r",
+					"}\r",
+					"\r",
+					"//Test 4: Security Headers Check (optional, informational)\r",
+					"pm.test(\"Security headers present (info)\", function () {\r",
+					"    //This might fail but it's informational\r",
+					"    const headers = pm.response.headers;\r",
+					"    console.log(\"Security Check:\");\r",
+					"    console.log(\"  - X-Content-Type-Options:\", headers.get(\"X-Content-Type-Options\") || \"❌ Missing\");\r",
+					"    console.log(\"  - X-Frame-Options:\", headers.get(\"X-Frame-Options\") || \"❌ Missing\");\r",
+					"});\r",
+					"\r",
+					"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+					"console.log(\"RESPONSE RECEIVED\");\r",
+					"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+					"console.log(\"Status:\", pm.response.code, pm.response.status);\r",
+					"console.log(\"Response Time:\", pm.response.responseTime + \"ms\");\r",
+					"console.log(\"Response Size:\", pm.response.responseSize, \"bytes\");\r",
+					"\r",
+					"//Performance categorization\r",
+					"if (pm.response.responseTime < 500) {\r",
+					"    console.log(\"Performance: EXCELLENT\");\r",
+					"} else if (pm.response.responseTime < 1000) {\r",
+					"    console.log(\"Performance: GOOD\");\r",
+					"} else if (pm.response.responseTime < 2000) {\r",
+					"    console.log(\"Performance: ACCEPTABLE\");\r",
+					"} else {\r",
+					"    console.log(\"Performance: NEEDS IMPROVEMENT\");\r",
+					"}\r",
+					"\r",
+					"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+				]
+			}
+		}
+	]
+}

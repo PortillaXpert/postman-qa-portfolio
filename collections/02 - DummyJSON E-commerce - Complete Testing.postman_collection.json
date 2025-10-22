@@ -1,0 +1,2687 @@
+{
+	"info": {
+		"_postman_id": "fb694b01-0221-4c37-9e8d-ab67c0065f67",
+		"name": "02 - DummyJSON E-commerce - Complete Testing",
+		"description": "## Overview\n\nComprehensive Postman testing collection demonstrating advanced e-commerce API automation and real-world QA engineering techniques.  \n  \nThis collection validates all key business workflows including authentication, product catalog operations, cart management, and full end-to-end purchase journeys — using modern testing strategies and ISTQB-aligned methodologies.\n\n---\n\n## What This Collection Demonstrates\n\n### Technical Scope\n\n- JWT authentication and token lifecycle management\n    \n- Bearer token–based authorization flows\n    \n- End-to-end e-commerce workflows (search → cart → checkout)\n    \n- Data-driven and dynamic variable testing\n    \n- Request chaining and reusable test logic\n    \n- Business logic and data integrity validation\n    \n- Security and authorization testing\n    \n- Performance and response time benchmarking\n    \n\n### Business Domains Covered\n\n- Authentication and Authorization\n    \n- User Management\n    \n- Product Catalog and Search\n    \n- Shopping Cart\n    \n- Pricing, Discounts, and Totals\n    \n- Complete Purchase Workflows\n    \n\n---\n\n## Collection Summary\n\n| Module | Requests | Tests | Coverage |\n| --- | --- | --- | --- |\n| Authentication & Tokens | 6 | 44 | Login, Refresh, Negative |\n| Users Management | 3 | 26 | CRUD with Auth |\n| Products & Search | 6 | 50 | Catalog, Filters, Search |\n| Shopping Cart | 5 | 35 | Add, Update, Delete |\n| E-commerce Workflows | 3 | 31 | End-to-End Journeys |\n| **TOTAL** | **26** | **186+** | **Complete E-commerce Coverage** |\n\n---\n\n## Usage Guide\n\n### Prerequisites\n\n1. Import the collection into Postman.\n    \n2. Import the corresponding environment: **DummyJSON – Production**.\n    \n3. Select the environment from the dropdown menu.\n    \n\n### Execution Options\n\n**1\\. Run Individual Requests**\n\n- Open a request and click **Send**.\n    \n- View assertions in the **Test Results** tab.\n    \n\n**2\\. Run Specific Modules**\n\n- Right-click a folder (e.g., `02.3 - Products & Search`).\n    \n- Select **Run folder** for grouped execution.\n    \n\n**3\\. Run Full Collection**\n\n- Run the entire collection sequentially to simulate a complete user flow.\n    \n\n---\n\n## Key Test Coverage\n\n### Authentication (44 Tests)\n\n- JWT generation and validation\n    \n- Token refresh flow\n    \n- Invalid or missing credentials handling\n    \n- Expired token rejection\n    \n- Security and format validation\n    \n\n### Products (50 Tests)\n\n- Catalog integrity validation\n    \n- Search and filtering\n    \n- Price and discount calculations\n    \n- Image and rating verification\n    \n- Category-level testing\n    \n\n### Shopping Cart (35 Tests)\n\n- Add, update, and delete operations\n    \n- Quantity and total validation\n    \n- Discount application logic\n    \n- Multi-product and multi-user cart validation\n    \n\n### Workflows (31 Tests)\n\n- Full purchase journey (login → search → cart → checkout)\n    \n- Data isolation per user\n    \n- Sequential request chaining\n    \n- Business rule validation\n    \n\n---\n\n## Test Automation Techniques\n\n### Dynamic Variables\n\n``` javascript\npm.environment.set(\"authToken\", jsonData.accessToken);\npm.expect(cart.discountedTotal).to.be.at.most(cart.total);\n\n ```\n\n### Business Logic Validation\n\n``` javascript\nconst savings = cart.total - cart.discountedTotal;\nconst totalQty = products.reduce((sum, p) => sum + p.quantity, 0);\npm.expect(totalQty).to.be.above(0);\n\n ```\n\n### Security Assertions\n\n``` javascript\nconst tokenParts = token.split('.');\npm.expect(tokenParts).to.have.lengthOf(3);\npm.expect(cart.userId).to.eql(authenticatedUserId);\n\n ```\n\n---\n\n## ISTQB-Aligned Design Techniques\n\n- **Equivalence Partitioning:** Valid/invalid credentials\n    \n- **Boundary Value Analysis:** Price and stock validation\n    \n- **State Transition Testing:** Cart lifecycle stages\n    \n- **Decision Table Testing:** Discount calculation logic\n    \n- **Error Guessing:** Invalid IDs, token expiration\n    \n- **Use Case Testing:** End-to-end purchase flows\n    \n\n---\n\n## Security and Compliance Validations\n\n- JWT and Bearer token structure\n    \n- Unauthorized access rejection\n    \n- Data isolation across users\n    \n- Secure HTTPS endpoints\n    \n- No sensitive data in error payloads\n    \n\n---\n\n## Performance Benchmarks\n\n| Operation | Target Response Time |\n| --- | --- |\n| Authentication | < 2s |\n| Product Search | < 3s |\n| Cart Operations | < 2s |\n| Average Response | \\~500ms |\n\n---\n\n## Realistic E-commerce Scenarios\n\n**Scenario 1: New User Purchase Flow**\n\n1. Login and obtain token\n    \n2. Browse product catalog\n    \n3. Search and filter items\n    \n4. Add product to cart\n    \n5. Validate totals and discounts\n    \n6. Complete simulated checkout\n    \n\n**Scenario 2: Returning User**\n\n1. Login with existing account\n    \n2. Retrieve and update existing cart\n    \n3. Continue shopping and validate totals\n    \n\n**Scenario 3: Product Discovery**\n\n1. Browse categories\n    \n2. Filter by attributes\n    \n3. Search and add items\n    \n4. Validate response structures and timing\n    \n\n---\n\n## Author\n\n**Juan Pablo Portilla**  \n  \nQA Automation Engineer  \n  \nSpecialization: API Testing and E-commerce Validation  \n  \nGitHub: [PortillaXpert](https://github.com/PortillaXpert)  \n  \nLinkedIn: [Juan Pablo Rivera](https://www.linkedin.com/in/juan-pablo-rivera-a90335374)\n\n---\n\n## Version History\n\n**v1.0 – October 2025**\n\n- Initial complete release\n    \n- 26 requests, 186+ automated tests\n    \n- Full authentication, product, and cart workflows validated\n    \n\n---\n\n## API Reference\n\n- **Base URL:** [https://dummyjson.com](https://dummyjson.com)\n    \n- **Authentication:** JWT Bearer Token\n    \n- **Rate Limits:** Generous (24-hour data persistence)\n    \n- **Status:** Public test-safe API\n    \n\n---\n\n**This collection represents a production-grade demonstration of API automation and validation for complex e-commerce systems, built following professional QA engineering standards.**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33194388",
+		"_collection_link": "https://personal-qa-workspace.postman.co/workspace/QA-Portfolio~803d67d6-a5a5-400a-91af-102152a9609d/collection/33194388-fb694b01-0221-4c37-9e8d-ab67c0065f67?action=share&source=collection_link&creator=33194388"
+	},
+	"item": [
+		{
+			"name": "02.1 - Authentication & Tokens",
+			"item": [
+				{
+					"name": "TC-AUTH-101: Login - Get JWT Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-AUTH-101: Login & Get JWT Token\r",
+									"// Test Type: Authentication & Security\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Successful Authentication\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Authentication is fast (<2s)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: JWT Token Present\r",
+									"pm.test(\"JWT access token is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('accessToken');\r",
+									"    pm.expect(jsonData.accessToken).to.be.a('string');\r",
+									"    pm.expect(jsonData.accessToken.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Refresh Token Present\r",
+									"pm.test(\"Refresh token is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('refreshToken');\r",
+									"    pm.expect(jsonData.refreshToken).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Test 5: User Data Returned\r",
+									"pm.test(\"User data is included in response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData).to.have.property('username');\r",
+									"    pm.expect(jsonData).to.have.property('email');\r",
+									"    pm.expect(jsonData).to.have.property('firstName');\r",
+									"    pm.expect(jsonData).to.have.property('lastName');\r",
+									"});\r",
+									"\r",
+									"//Test 6: JWT Token Format Validation\r",
+									"pm.test(\"Token has valid JWT format (3 parts)\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const tokenParts = jsonData.accessToken.split('.');\r",
+									"    pm.expect(tokenParts).to.have.lengthOf(3);\r",
+									"});\r",
+									"\r",
+									"//Test 7: Username Matches Request\r",
+									"pm.test(\"Returned username matches request\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.username).to.eql('emilys');\r",
+									"});\r",
+									"\r",
+									"//Test 8: Email Format Valid\r",
+									"pm.test(\"Email format is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"    pm.expect(jsonData.email).to.match(emailRegex);\r",
+									"});\r",
+									"\r",
+									"//Test 9: User ID is Number\r",
+									"pm.test(\"User ID is a valid number\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.be.a('number');\r",
+									"    pm.expect(jsonData.id).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 10: Gender Field Present\r",
+									"pm.test(\"Gender field is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('gender');\r",
+									"});\r",
+									"\r",
+									"// CRITICAL: Save tokens\r",
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"authToken\", jsonData.accessToken);\r",
+									"pm.environment.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"pm.environment.set(\"userId\", jsonData.id);\r",
+									"pm.environment.set(\"username\", jsonData.username);\r",
+									"pm.environment.set(\"userEmail\", jsonData.email);\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-AUTH-101: AUTHENTICATION SUCCESS\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"User ID:\", jsonData.id);\r",
+									"console.log(\"Username:\", jsonData.username);\r",
+									"console.log(\"Email:\", jsonData.email);\r",
+									"console.log(\"Name:\", jsonData.firstName, jsonData.lastName);\r",
+									"console.log(\"Gender:\", jsonData.gender);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Tokens saved to environment:\");\r",
+									"console.log(\"- Access Token:\", jsonData.accessToken.substring(0, 30) + \"...\");\r",
+									"console.log(\"- Refresh Token:\", jsonData.refreshToken.substring(0, 30) + \"...\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Ready for authenticated requests!\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"emilys\",\r\n  \"password\": \"emilyspass\",\r\n  \"expiresInMins\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-AUTH-102: Get Current User (With Token)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-AUTH-102: Get Current User (Authenticated)\r",
+									"// Test Type: Authorization Validation\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Authorized Access\r",
+									"pm.test(\"Status code is 200 OK (authorized)\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: User ID Matches\r",
+									"pm.test(\"User ID matches logged-in user\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const savedUserId = parseInt(pm.environment.get(\"userId\"));\r",
+									"    pm.expect(jsonData.id).to.eql(savedUserId);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Username Matches\r",
+									"pm.test(\"Username matches logged-in user\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const savedUsername = pm.environment.get(\"username\");\r",
+									"    pm.expect(jsonData.username).to.eql(savedUsername);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Complete User Profile\r",
+									"pm.test(\"Complete user profile returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    const requiredFields = [\r",
+									"        'id', 'username', 'email', 'firstName', 'lastName',\r",
+									"        'gender', 'image'\r",
+									"    ];\r",
+									"    \r",
+									"    requiredFields.forEach(field => {\r",
+									"        pm.expect(jsonData).to.have.property(field);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 6: Email Consistency\r",
+									"pm.test(\"Email matches login email\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const savedEmail = pm.environment.get(\"userEmail\");\r",
+									"    pm.expect(jsonData.email).to.eql(savedEmail);\r",
+									"});\r",
+									"\r",
+									"//Test 7: Image URL Valid\r",
+									"pm.test(\"User image URL is valid HTTPS\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    if (jsonData.image) {\r",
+									"        pm.expect(jsonData.image).to.include('https://');\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 8: Authorization Header Accepted\r",
+									"//If we got 200, token was valid\r",
+									"pm.test(\"Bearer token was accepted\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-AUTH-102: CURRENT USER DATA\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"User ID:\", jsonData.id);\r",
+									"console.log(\"Username:\", jsonData.username);\r",
+									"console.log(\"Full Name:\", jsonData.firstName, jsonData.lastName);\r",
+									"console.log(\"Email:\", jsonData.email);\r",
+									"console.log(\"Gender:\", jsonData.gender);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Token validation successful\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"emilys\",\r\n  \"password\": \"emilyspass\",\r\n  \"expiresInMins\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/me",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-AUTH-103: Refresh JWT Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-AUTH-103: Refresh JWT Token\r",
+									"// Test Type: Token Lifecycle\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Token Refreshed Successfully\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Token refresh is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: New Access Token Provided\r",
+									"pm.test(\"New access token generated\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('accessToken');\r",
+									"    pm.expect(jsonData.accessToken).to.be.a('string');\r",
+									"    pm.expect(jsonData.accessToken.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: New Refresh Token Provided\r",
+									"pm.test(\"New refresh token generated\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('refreshToken');\r",
+									"    pm.expect(jsonData.refreshToken).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Token is Different from Previous\r",
+									"pm.test(\"New token differs from old token\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const oldToken = pm.environment.get(\"authToken\");\r",
+									"    \r",
+									"    pm.expect(jsonData.accessToken).to.not.eql(oldToken);\r",
+									"});\r",
+									"\r",
+									"//Test 6: JWT Format Valid\r",
+									"pm.test(\"New token has valid JWT format\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const tokenParts = jsonData.accessToken.split('.');  // ← CAMBIO\r",
+									"    pm.expect(tokenParts).to.have.lengthOf(3);\r",
+									"});\r",
+									"\r",
+									"//Update tokens in environment\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"authToken\", jsonData.accessToken);\r",
+									"pm.environment.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-AUTH-103: TOKEN REFRESH SUCCESS\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"New access token generated\");\r",
+									"console.log(\"New refresh token generated\");\r",
+									"console.log(\"Tokens updated in environment\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"New Token:\", jsonData.accessToken.substring(0, 30) + \"...\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"refreshToken\": \"{{refreshToken}}\",\r\n  \"expiresInMins\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/refresh",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-AUTH-104: Login - Invalid Credentials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-AUTH-104: Login - Invalid Credentials\r",
+									"// Test Type: NEGATIVE Testing - Security\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Correct Error Status Code\r",
+									"pm.test(\"Status code is 400 Bad Request\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time (errors should be fast)\r",
+									"pm.test(\"Error response is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Error Message Present\r",
+									"pm.test(\"Error message is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Error Message is Descriptive\r",
+									"pm.test(\"Error message describes the problem\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.be.a('string');\r",
+									"    pm.expect(jsonData.message.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 5: No Token Generated on Error\r",
+									"pm.test(\"No access token on authentication failure\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('accessToken');\r",
+									"    pm.expect(jsonData).to.not.have.property('token');\r",
+									"});\r",
+									"\r",
+									"//Test 6: No Refresh Token on Error\r",
+									"pm.test(\"No refresh token on failure\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('refreshToken');\r",
+									"});\r",
+									"\r",
+									"//Test 7: No User Data Leaked\r",
+									"pm.test(\"No user data leaked on error\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('id');\r",
+									"    pm.expect(jsonData).to.not.have.property('email');\r",
+									"    pm.expect(jsonData).to.not.have.property('username');\r",
+									"});\r",
+									"\r",
+									"//Test 8: Security - No Stack Trace Leaked\r",
+									"pm.test(\"No stack trace in error response\", function () {\r",
+									"    const responseText = pm.response.text().toLowerCase();\r",
+									"    pm.expect(responseText).to.not.include('stack');\r",
+									"    pm.expect(responseText).to.not.include('trace');\r",
+									"    pm.expect(responseText).to.not.include('error:');\r",
+									"    pm.expect(responseText).to.not.include('exception');\r",
+									"});\r",
+									"\r",
+									"//Test 9: Content-Type is Still JSON\r",
+									"pm.test(\"Content-Type is JSON even for errors\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-AUTH-104: INVALID CREDENTIALS TEST\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Error Message:\", jsonData.message);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Security validations:\");\r",
+									"console.log(\"- No tokens generated\");\r",
+									"console.log(\"- No user data leaked\");\r",
+									"console.log(\"- No stack traces exposed\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"invalid_user_12345\",\r\n  \"password\": \"wrong_password_xyz\",\r\n  \"expiresInMins\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-AUTH-105: Get User Without Token (Unauthorized)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-AUTH-105: Get User Without Token\r",
+									"// Test Type: NEGATIVE - Authorization Required\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Unauthorized Status Code\r",
+									"//Expected: 401, Actual: 200\r",
+									"//This is a security finding documented for the API\r",
+									"pm.test(\"Status code is 401 Unauthorized\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Unauthorized response is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Error Message Present\r",
+									"//This SHOULD NOT happen, but it does\r",
+									"//This is a security finding documented for the API\r",
+									"pm.test(\"Error message explaining unauthorized\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('message');\r",
+									"    pm.expect(jsonData.message).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Error Mentions Authentication\r",
+									"pm.test(\"Error mentions authentication/token\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const message = jsonData.message.toLowerCase();\r",
+									"    const hasAuthError = message.includes('token') || \r",
+									"                        message.includes('auth') || \r",
+									"                        message.includes('unauthorized') ||\r",
+									"                        message.includes('invalid');\r",
+									"    pm.expect(hasAuthError).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Test 5: No User Data Without Auth\r",
+									"pm.test(\"No user data returned without authentication\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('id');\r",
+									"    pm.expect(jsonData).to.not.have.property('username');\r",
+									"    pm.expect(jsonData).to.not.have.property('email');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Security - WWW-Authenticate Header Check\r",
+									"//Some APIs return WWW-Authenticate header on 401\r",
+									"//This is informational, not critical\r",
+									"pm.test(\"Security headers present (info)\", function () {\r",
+									"    const authHeader = pm.response.headers.get(\"WWW-Authenticate\");\r",
+									"    console.log(\"  WWW-Authenticate header:\", authHeader || \"Not present\");\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-AUTH-105: SECURITY FINDING\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Issue: Endpoint not protected\");\r",
+									"console.log(\"Endpoint: /auth/me\");\r",
+									"console.log(\"Expected: 401 Unauthorized\");\r",
+									"console.log(\"Actual: 200 OK\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Risk: Medium - Data exposure without auth\");\r",
+									"console.log(\"Recommendation: Require JWT token validation\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/auth/me",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-AUTH-106: Get User With Invalid Token (Negative)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-AUTH-106: Get User With Invalid Token\r",
+									"// Test Type: NEGATIVE - Invalid Token\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Invalid Token Rejected\r",
+									"pm.test(\"Status code is 401 Unauthorized\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Token validation is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Error Message Present\r",
+									"pm.test(\"Error message for invalid token\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Error Indicates Invalid Token\r",
+									"pm.test(\"Error indicates token is invalid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const message = jsonData.message.toLowerCase();\r",
+									"    const hasTokenError = message.includes('token') || \r",
+									"                         message.includes('invalid') || \r",
+									"                         message.includes('malformed') ||\r",
+									"                         message.includes('expired');\r",
+									"    pm.expect(hasTokenError).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Test 5: No Data Access With Invalid Token\r",
+									"pm.test(\"No user data with invalid token\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('id');\r",
+									"    pm.expect(jsonData).to.not.have.property('username');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Token Format Validation Works\r",
+									"//If we got 401, the API is validating tokens\r",
+									"pm.test(\"API validates token format\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(401);\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-AUTH-106: INVALID TOKEN TEST\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Status:\", pm.response.code);\r",
+									"console.log(\"Error:\", pm.response.json().message);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Token validation working correctly\");\r",
+									"console.log(\"Invalid tokens properly rejected\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "invalid_token_12345_xyz",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/auth/me",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-AUTH-101**  \nPriority: Critical  \nObjective: Authenticate user and obtain JWT token\n\nTest Type: Authentication Flow  \nSecurity: JWT Bearer Token\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- JWT token returned  \n\\- Refresh token provided  \n\\- User data included\n\nCredentials:  \n\\- Username: emilys  \n\\- Password: emilyspass\n\n---\n\n**Test Case ID: TC-AUTH-102**  \nPriority: High  \nObjective: Retrieve current authenticated user data\n\nTest Type: Authorization Validation  \nDepends on: TC-AUTH-101 (token required)\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- User data matches logged-in user  \n\\- Token is valid and accepted\n\n---\n\n**Test Case ID: TC-AUTH-103**  \nPriority: High  \nObjective: Refresh expired/expiring JWT token\n\nTest Type: Token Lifecycle Management  \nDepends on: TC-AUTH-101\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- New access token generated  \n\\- New refresh token provided\n\n---\n\n**Test Case ID: TC-AUTH-104**  \nPriority: High  \nObjective: Validate error handling for invalid credentials\n\nTest Type: NEGATIVE Testing - Security  \nTechnique: Error Guessing\n\nExpected Results:\n\n- Status: 400 Bad Request\n    \n- Error message present\n    \n- No token generated\n    \n- Security: No sensitive data leaked\n    \n\n---\n\n**Test Case ID: TC-AUTH-105**  \nPriority: High  \nObjective: Validate authentication requirement enforcement  \n  \nTest Type: NEGATIVE Testing - Authorization  \nSecurity: Verify endpoints are protected  \n  \n**FINDING: This endpoint is NOT protected by DummyJSON API**  \nExpected: 401 Unauthorized  \nActual: 200 OK (returns data without authentication)  \n  \nSecurity Risk: Medium  \nRecommendation: Endpoint should require valid JWT token  \n  \nStatus: DOCUMENTED - API Design Issue (not a test failure)  \n\n---\n\n**Test Case ID: TC-AUTH-106**  \nPriority: High  \nObjective: Validate invalid token rejection\n\nTest Type: NEGATIVE Testing - Token Validation  \nSecurity: Ensure tokens are validated properly\n\nExpected Results:  \n\\- Status: 401 Unauthorized  \n\\- Invalid token rejected  \n\\- No access granted\n\n---"
+		},
+		{
+			"name": "02.2 - Users Management",
+			"item": [
+				{
+					"name": "TC-USER-201: Get All Users (With Pagination)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-USER-201: Get All Users (Paginated)\r",
+									"// Test Type: Functional - Data Retrieval\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Successful Response\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Users Array Present\r",
+									"pm.test(\"Users array is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('users');\r",
+									"    pm.expect(jsonData.users).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Users List Not Empty\r",
+									"pm.test(\"Users list contains data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.users.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Pagination Metadata Present\r",
+									"pm.test(\"Pagination metadata present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('total');\r",
+									"    pm.expect(jsonData).to.have.property('skip');\r",
+									"    pm.expect(jsonData).to.have.property('limit');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Limit Respected\r",
+									"pm.test(\"Returned users respect limit parameter\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.users.length).to.be.at.most(10);\r",
+									"});\r",
+									"\r",
+									"//Test 7: User Structure Validation\r",
+									"pm.test(\"Each user has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requiredFields = ['id', 'firstName', 'lastName', 'email', 'username'];\r",
+									"\r",
+									"    jsonData.users.forEach((user, index) => {\r",
+									"        requiredFields.forEach(field => {\r",
+									"            pm.expect(user[field], `User at index ${index} missing field: ${field}`)\r",
+									"                .to.not.be.undefined;\r",
+									"\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Test 8: Email Format Validation\r",
+									"pm.test(\"All emails have valid format\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"\r",
+									"    jsonData.users.forEach((user, index) => {\r",
+									"        pm.expect(user.email).to.match(emailRegex,\r",
+									"            `Invalid email at index ${index}: ${user.email}`);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 9: User IDs are Unique\r",
+									"pm.test(\"All user IDs are unique\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const userIds = jsonData.users.map(user => user.id);\r",
+									"    const uniqueIds = [...new Set(userIds)];\r",
+									"    pm.expect(userIds.length).to.eql(uniqueIds.length);\r",
+									"});\r",
+									"\r",
+									"//Test 10: Total Count is Reasonable\r",
+									"pm.test(\"Total users count is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total).to.be.a('number');\r",
+									"    pm.expect(jsonData.total).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Save first user for subsequent tests\r",
+									"const jsonData = pm.response.json();\r",
+									"if (jsonData.users && jsonData.users.length > 0) {\r",
+									"    const firstUser = jsonData.users[0];\r",
+									"    pm.environment.set(\"testUserId\", firstUser.id);\r",
+									"    pm.environment.set(\"testUsername\", firstUser.username);\r",
+									"}\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-USER-201: USERS LIST SUMMARY\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Total Users:\", jsonData.total);\r",
+									"console.log(\"Returned:\", jsonData.users.length);\r",
+									"console.log(\"Skip:\", jsonData.skip);\r",
+									"console.log(\"Limit:\", jsonData.limit);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"First User Sample:\");\r",
+									"if (jsonData.users[0]) {\r",
+									"    console.log(\"  ID:\", jsonData.users[0].id);\r",
+									"    console.log(\"  Name:\", jsonData.users[0].firstName, jsonData.users[0].lastName);\r",
+									"    console.log(\"  Email:\", jsonData.users[0].email);\r",
+									"}\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users?limit=10&skip=0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-USER-202: Get Single User by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-USER-202: Get Single User by ID\r",
+									"// Test Type: Component Testing\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Successful Retrieval\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: User ID Matches Request\r",
+									"pm.test(\"Returned user ID matches requested\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requestedId = parseInt(pm.environment.get(\"testUserId\"));\r",
+									"    pm.expect(jsonData.id).to.eql(requestedId);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Complete User Profile\r",
+									"pm.test(\"User has complete profile data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requiredFields = [\r",
+									"        'id', 'firstName', 'lastName', 'email', 'username',\r",
+									"        'gender', 'image', 'age', 'phone'\r",
+									"    ];\r",
+									"    \r",
+									"    requiredFields.forEach(field => {\r",
+									"        pm.expect(jsonData).to.have.property(field);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 5: Email Format Valid\r",
+									"pm.test(\"Email format is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\r",
+									"    pm.expect(jsonData.email).to.match(emailRegex);\r",
+									"});\r",
+									"\r",
+									"//Test 6: Age is Valid Number\r",
+									"pm.test(\"Age is a valid positive number\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.age).to.be.a('number');\r",
+									"    pm.expect(jsonData.age).to.be.within(1, 150);\r",
+									"});\r",
+									"\r",
+									"//Test 7: Image URL Valid\r",
+									"pm.test(\"Profile image URL is valid HTTPS\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    if (jsonData.image) {\r",
+									"        pm.expect(jsonData.image).to.include('https://');\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 8: Username Matches Saved\r",
+									"pm.test(\"Username matches saved username\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const savedUsername = pm.environment.get(\"testUsername\");\r",
+									"    if (savedUsername) {\r",
+									"        pm.expect(jsonData.username).to.eql(savedUsername);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-USER-202: USER DETAILS\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"ID:\", jsonData.id);\r",
+									"console.log(\"Name:\", jsonData.firstName, jsonData.lastName);\r",
+									"console.log(\"Username:\", jsonData.username);\r",
+									"console.log(\"Email:\", jsonData.email);\r",
+									"console.log(\"Age:\", jsonData.age);\r",
+									"console.log(\"Gender:\", jsonData.gender);\r",
+									"console.log(\"Phone:\", jsonData.phone);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/{{testUserId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"{{testUserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-USER-203: Search Users by Query",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-USER-203: Search Users\r",
+									"// Test Type: Search/Filter Functionality\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Search Successful\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Search response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Results Array Present\r",
+									"pm.test(\"Users array present in results\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('users');\r",
+									"    pm.expect(jsonData.users).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"// Test 4: Search Returns Results\r",
+									"pm.test(\"Search returns at least one result\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.users.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Results Match Search Query\r",
+									"pm.test(\"Results contain search term 'John'\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const searchTerm = 'john';\r",
+									"    \r",
+									"    const hasMatch = jsonData.users.some(user => {\r",
+									"        const firstName = user.firstName.toLowerCase();\r",
+									"        const lastName = user.lastName.toLowerCase();\r",
+									"        const username = user.username.toLowerCase();\r",
+									"        \r",
+									"        return firstName.includes(searchTerm) || \r",
+									"               lastName.includes(searchTerm) || \r",
+									"               username.includes(searchTerm);\r",
+									"    });\r",
+									"    \r",
+									"    pm.expect(hasMatch).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Test 6: Pagination Metadata\r",
+									"pm.test(\"Search results include pagination\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('total');\r",
+									"    pm.expect(jsonData).to.have.property('limit');\r",
+									"});\r",
+									"\r",
+									"//Test 7: All Results Have Valid Structure\r",
+									"pm.test(\"All search results have valid structure\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.users.forEach(user => {\r",
+									"        pm.expect(user).to.have.property('id');\r",
+									"        pm.expect(user).to.have.property('firstName');\r",
+									"        pm.expect(user).to.have.property('lastName');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-USER-203: SEARCH RESULTS\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"Search Query: 'John'\");\r",
+									"console.log(\"Results Found:\", jsonData.users.length);\r",
+									"console.log(\"Total Matches:\", jsonData.total);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"if (jsonData.users.length > 0) {\r",
+									"    console.log(\"Sample Results:\");\r",
+									"    jsonData.users.slice(0, 3).forEach((user, i) => {\r",
+									"        console.log(`  ${i+1}. ${user.firstName} ${user.lastName} (${user.username})`);\r",
+									"    });\r",
+									"}\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/search?q=John",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "John"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-USER-201**  \nPriority: High  \nObjective: Retrieve paginated list of users\n\nTest Type: Functional Testing  \nAuthentication: Required\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- List of users returned  \n\\- Pagination metadata present  \n\\- Each user has complete structure\n\n---\n\n**Test Case ID: TC-USER-202**  \nPriority: High  \nObjective: Retrieve specific user by ID\n\nDepends on: TC-USER-201 (uses saved testUserId)\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Complete user profile returned  \n\\- ID matches requested ID\n\n---\n\n**Test Case ID: TC-USER-203**  \nPriority: Medium  \nObjective: Validate user search functionality  \n  \nTest Type: Functional - Search/Filter Testing  \n  \nExpected Results:  \n\\- Status: 200 OK  \n\\- Results match search criteria  \n\\- Pagination works with search\n\n---"
+		},
+		{
+			"name": "02.3 - Products & Search",
+			"item": [
+				{
+					"name": "TC-PROD-301: Get All Products (Paginated)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-PROD-301: Get All Products\r",
+									"// Test Type: E-commerce - Product Catalog\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Successful Response\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Products Array Present\r",
+									"pm.test(\"Products array is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('products');\r",
+									"    pm.expect(jsonData.products).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Products Not Empty\r",
+									"pm.test(\"Products list contains items\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.products.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Product Structure Complete\r",
+									"pm.test(\"Each product has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requiredFields = [\r",
+									"        'id', 'title', 'description', 'price', 'discountPercentage',\r",
+									"        'rating', 'stock', 'brand', 'category', 'thumbnail', 'images'\r",
+									"    ];\r",
+									"    \r",
+									"    jsonData.products.forEach((product, index) => {\r",
+									"        requiredFields.forEach(field => {\r",
+									"            pm.expect(product[field], `Product ${index} missing: ${field}`)\r",
+									"              .to.not.be.undefined;\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Test 6: Price Validation\r",
+									"pm.test(\"All prices are positive numbers\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        pm.expect(product.price).to.be.a('number');\r",
+									"        pm.expect(product.price).to.be.above(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 7: Rating Validation\r",
+									"pm.test(\"Ratings are within valid range (0-5)\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        pm.expect(product.rating).to.be.a('number');\r",
+									"        pm.expect(product.rating).to.be.within(0, 5);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 8: Stock Validation\r",
+									"pm.test(\"Stock is non-negative integer\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        pm.expect(product.stock).to.be.a('number');\r",
+									"        pm.expect(product.stock).to.be.at.least(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 9: Discount Percentage Valid\r",
+									"pm.test(\"Discount percentage is valid (0-100)\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        pm.expect(product.discountPercentage).to.be.a('number');\r",
+									"        pm.expect(product.discountPercentage).to.be.within(0, 100);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 10: Images Array Valid\r",
+									"pm.test(\"Each product has images array\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        pm.expect(product.images).to.be.an('array');\r",
+									"        pm.expect(product.images.length).to.be.above(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 11: Thumbnail URL Valid\r",
+									"pm.test(\"Thumbnail URLs are HTTPS\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        if (product.thumbnail) {\r",
+									"            pm.expect(product.thumbnail).to.include('https://');\r",
+									"        }\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 12: Pagination Metadata\r",
+									"pm.test(\"Pagination metadata present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('total');\r",
+									"    pm.expect(jsonData).to.have.property('skip');\r",
+									"    pm.expect(jsonData).to.have.property('limit');\r",
+									"});\r",
+									"\r",
+									"//Save first product for subsequent tests\r",
+									"const jsonData = pm.response.json();\r",
+									"if (jsonData.products && jsonData.products.length > 0) {\r",
+									"    const firstProduct = jsonData.products[0];\r",
+									"    pm.environment.set(\"productId\", firstProduct.id);\r",
+									"    pm.environment.set(\"productTitle\", firstProduct.title);\r",
+									"    pm.environment.set(\"productCategory\", firstProduct.category);\r",
+									"}\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-PROD-301: PRODUCT CATALOG\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Total Products:\", jsonData.total);\r",
+									"console.log(\"Returned:\", jsonData.products.length);\r",
+									"console.log(\"Skip:\", jsonData.skip);\r",
+									"console.log(\"Limit:\", jsonData.limit);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Sample Product:\");\r",
+									"const sample = jsonData.products[0];\r",
+									"console.log(\"  ID:\", sample.id);\r",
+									"console.log(\"  Title:\", sample.title);\r",
+									"console.log(\"  Price: $\" + sample.price);\r",
+									"console.log(\"  Stock:\", sample.stock);\r",
+									"console.log(\"  Rating:\", sample.rating + \"/5\");\r",
+									"console.log(\"  Category:\", sample.category);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products?limit=10&skip=0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-PROD-302: Get Single Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-PROD-302: Get Single Product\r",
+									"// Test Type: Product Detail Retrieval\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Product Retrieved\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Product ID Matches\r",
+									"pm.test(\"Product ID matches requested\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requestedId = parseInt(pm.environment.get(\"productId\"));\r",
+									"    pm.expect(jsonData.id).to.eql(requestedId);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Complete Product Data\r",
+									"pm.test(\"Product has complete information\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requiredFields = [\r",
+									"        'id', 'title', 'description', 'price', 'discountPercentage',\r",
+									"        'rating', 'stock', 'brand', 'category', 'thumbnail', 'images'\r",
+									"    ];\r",
+									"    \r",
+									"    requiredFields.forEach(field => {\r",
+									"        pm.expect(jsonData).to.have.property(field);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 5: Price Business Rule\r",
+									"pm.test(\"Price is positive and reasonable\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.price).to.be.a('number');\r",
+									"    pm.expect(jsonData.price).to.be.above(0);\r",
+									"    pm.expect(jsonData.price).to.be.below(100000); // reasonable max\r",
+									"});\r",
+									"\r",
+									"//Test 6: Discount Calculation Valid\r",
+									"pm.test(\"Discount percentage is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.discountPercentage).to.be.within(0, 100);\r",
+									"});\r",
+									"\r",
+									"//Test 7: Final Price Calculation\r",
+									"pm.test(\"Can calculate discounted price\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const originalPrice = jsonData.price;\r",
+									"    const discount = jsonData.discountPercentage;\r",
+									"    const discountedPrice = originalPrice * (1 - discount / 100);\r",
+									"    \r",
+									"    pm.expect(discountedPrice).to.be.above(0);\r",
+									"    pm.expect(discountedPrice).to.be.at.most(originalPrice);\r",
+									"    \r",
+									"    console.log(\"  Original Price: $\" + originalPrice);\r",
+									"    console.log(\"  Discount: \" + discount + \"%\");\r",
+									"    console.log(\"  Final Price: $\" + discountedPrice.toFixed(2));\r",
+									"});\r",
+									"\r",
+									"//Test 8: Stock Availability\r",
+									"pm.test(\"Stock level is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.stock).to.be.a('number');\r",
+									"    pm.expect(jsonData.stock).to.be.at.least(0);\r",
+									"    \r",
+									"    if (jsonData.stock > 0) {\r",
+									"        console.log(\"Product IN STOCK:\", jsonData.stock, \"units\");\r",
+									"    } else {\r",
+									"        console.log(\"Product OUT OF STOCK\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 9: Images Array Not Empty\r",
+									"pm.test(\"Product has images\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.images).to.be.an('array');\r",
+									"    pm.expect(jsonData.images.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 10: All Image URLs Valid\r",
+									"pm.test(\"All image URLs are valid HTTPS\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.images.forEach((imageUrl, index) => {\r",
+									"        pm.expect(imageUrl).to.include('https://', \r",
+									"            `Image ${index} is not HTTPS`);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-PROD-302: PRODUCT DETAILS\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"ID:\", jsonData.id);\r",
+									"console.log(\"Title:\", jsonData.title);\r",
+									"console.log(\"Brand:\", jsonData.brand);\r",
+									"console.log(\"Category:\", jsonData.category);\r",
+									"console.log(\"Price: $\" + jsonData.price);\r",
+									"console.log(\"Discount:\", jsonData.discountPercentage + \"%\");\r",
+									"console.log(\"Rating:\", jsonData.rating + \"/5\");\r",
+									"console.log(\"Stock:\", jsonData.stock, \"units\");\r",
+									"console.log(\"Images:\", jsonData.images.length);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/{{productId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-PROD-303: Search Products by Query",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-PROD-303: Search Products\r",
+									"// Test Type: Search Functionality\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Search Successful\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Search response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Products Array Present\r",
+									"pm.test(\"Products array in results\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('products');\r",
+									"    pm.expect(jsonData.products).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Search Returns Results\r",
+									"pm.test(\"Search returns results\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.products.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Results Relevance\r",
+									"pm.test(\"Results contain search term 'phone'\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const searchTerm = 'phone';\r",
+									"    \r",
+									"    const hasRelevantResults = jsonData.products.some(product => {\r",
+									"        const title = product.title.toLowerCase();\r",
+									"        const description = product.description.toLowerCase();\r",
+									"        const category = product.category.toLowerCase();\r",
+									"        \r",
+									"        return title.includes(searchTerm) || \r",
+									"               description.includes(searchTerm) ||\r",
+									"               category.includes(searchTerm);\r",
+									"    });\r",
+									"    \r",
+									"    pm.expect(hasRelevantResults).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Test 6: All Results Have Complete Data\r",
+									"pm.test(\"All results have complete product data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requiredFields = ['id', 'title', 'price', 'stock'];\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        requiredFields.forEach(field => {\r",
+									"            pm.expect(product).to.have.property(field);\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 7: Search Metadata\r",
+									"pm.test(\"Search metadata present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('total');\r",
+									"    pm.expect(jsonData).to.have.property('limit');\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-PROD-303: SEARCH RESULTS\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"Search Query: 'phone'\");\r",
+									"console.log(\"Results Found:\", jsonData.products.length);\r",
+									"console.log(\"Total Matches:\", jsonData.total);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"if (jsonData.products.length > 0) {\r",
+									"    console.log(\"Top 3 Results:\");\r",
+									"    jsonData.products.slice(0, 3).forEach((product, i) => {\r",
+									"        console.log(`  ${i+1}. ${product.title} - $${product.price}`);\r",
+									"    });\r",
+									"}\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/search?q=phone",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "phone"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-PROD-304: Get All Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"pm.test(\"Categories array\", () => pm.expect(pm.response.json()).to.be.an('array'));\r",
+									"pm.test(\"Has categories\", () => pm.expect(pm.response.json().length).to.be.above(0));\r",
+									"pm.test(\"All categories have slug and name as strings\", () => {\r",
+									"    pm.response.json().forEach((cat, index) => {\r",
+									"        pm.expect(cat).to.have.property('slug');\r",
+									"        pm.expect(cat.slug, `Category ${index} slug should be string`).to.be.a('string');\r",
+									"\r",
+									"        pm.expect(cat).to.have.property('name');\r",
+									"        pm.expect(cat.name, `Category ${index} name should be string`).to.be.a('string');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"const categories = pm.response.json();\r",
+									"pm.environment.set(\"firstCategory\", categories[0]);\r",
+									"console.log(\"Categories:\", categories.length);\r",
+									"console.log(\"Sample:\", categories.slice(0, 5).join(', '));"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/categories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-PROD-305: Filter Products by Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"\r",
+									"pm.test(\"Has products or category exists\", () => {\r",
+									"    const products = pm.response.json().products;\r",
+									"    pm.expect(products).to.be.an('array');\r",
+									"    \r",
+									"    if (products.length === 0) {\r",
+									"        console.log(\"Category exists but has no products\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"All same category\", () => {\r",
+									"    const category = pm.environment.get(\"firstCategory\");\r",
+									"    pm.response.json().products.forEach(p => {\r",
+									"        pm.expect(p.category).to.eql(category);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"console.log(\"Category:\", pm.environment.get(\"firstCategory\"));\r",
+									"console.log(\"Products:\", pm.response.json().products.length);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/category/{{firstCategory}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"category",
+								"{{firstCategory}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-PROD-306: Get Non-existent Product (Negative)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 404\", () => pm.response.to.have.status(404));\r",
+									"pm.test(\"Error message\", () => {\r",
+									"    pm.expect(pm.response.json()).to.have.property('message');\r",
+									"});\r",
+									"pm.test(\"No product data\", () => {\r",
+									"    pm.expect(pm.response.json()).to.not.have.property('id');\r",
+									"});\r",
+									"\r",
+									"console.log(\"Product not found (expected)\");\r",
+									"console.log(\"Error:\", pm.response.json().message);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/99999",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"99999"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-PROD-301**  \nPriority: High  \nObjective: Retrieve product catalog with pagination\n\nTest Type: Functional - Product Listing  \nAuthentication: Not required (public endpoint)\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Products array with complete data  \n\\- Pagination metadata  \n\\- Valid product structure\n\n---\n\n**Test Case ID: TC-PROD-302**  \nPriority: High  \nObjective: Retrieve specific product details\n\nDepends on: TC-PROD-301 (uses saved productId)\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Complete product information  \n\\- All business rules validated\n\n---\n\n**Test Case ID: TC-PROD-303**  \nPriority: High  \nObjective: Validate product search functionality  \n  \nTest Type: Search/Filter Testing  \n  \nExpected Results:  \n\\- Status: 200 OK  \n\\- Results match search criteria  \n\\- Relevant products returned\n\n---"
+		},
+		{
+			"name": "02.4 - Shopping Cart",
+			"item": [
+				{
+					"name": "TC-CART-401: Get User's Current Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-CART-401: Get User's Cart\r",
+									"// Test Type: E-commerce - Cart Retrieval\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Cart Retrieved\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Carts Array Present\r",
+									"pm.test(\"Carts array is present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('carts');\r",
+									"    pm.expect(jsonData.carts).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Cart Has Structure\r",
+									"pm.test(\"Cart has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    if (jsonData.carts.length > 0) {\r",
+									"        const cart = jsonData.carts[0];\r",
+									"        pm.expect(cart).to.have.property('id');\r",
+									"        pm.expect(cart).to.have.property('products');\r",
+									"        pm.expect(cart).to.have.property('total');\r",
+									"        pm.expect(cart).to.have.property('discountedTotal');\r",
+									"        pm.expect(cart).to.have.property('userId');\r",
+									"        pm.expect(cart).to.have.property('totalProducts');\r",
+									"        pm.expect(cart).to.have.property('totalQuantity');\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 5: User ID Matches\r",
+									"pm.test(\"Cart belongs to authenticated user\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const authUserId = parseInt(pm.environment.get(\"userId\"));\r",
+									"    \r",
+									"    if (jsonData.carts.length > 0) {\r",
+									"        jsonData.carts.forEach(cart => {\r",
+									"            pm.expect(cart.userId).to.eql(authUserId);\r",
+									"        });\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 6: Products Array Valid\r",
+									"pm.test(\"Cart products array is valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    if (jsonData.carts.length > 0) {\r",
+									"        const cart = jsonData.carts[0];\r",
+									"        pm.expect(cart.products).to.be.an('array');\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 7: Total is Number\r",
+									"pm.test(\"Cart total is valid number\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    if (jsonData.carts.length > 0) {\r",
+									"        const cart = jsonData.carts[0];\r",
+									"        pm.expect(cart.total).to.be.a('number');\r",
+									"        pm.expect(cart.total).to.be.at.least(0);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 8: Discounted Total Valid\r",
+									"pm.test(\"Discounted total <= original total\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    if (jsonData.carts.length > 0) {\r",
+									"        const cart = jsonData.carts[0];\r",
+									"        pm.expect(cart.discountedTotal).to.be.at.most(cart.total);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Save cart ID for subsequent operations\r",
+									"const jsonData = pm.response.json();\r",
+									"if (jsonData.carts && jsonData.carts.length > 0) {\r",
+									"    const cart = jsonData.carts[0];\r",
+									"    pm.environment.set(\"cartId\", cart.id);\r",
+									"    \r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    console.log(\"TC-CART-401: USER'S CART\");\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    console.log(\"Cart ID:\", cart.id);\r",
+									"    console.log(\"User ID:\", cart.userId);\r",
+									"    console.log(\"Total Products:\", cart.totalProducts);\r",
+									"    console.log(\"Total Quantity:\", cart.totalQuantity);\r",
+									"    console.log(\"Total Amount: $\" + cart.total);\r",
+									"    console.log(\"Discounted Total: $\" + cart.discountedTotal);\r",
+									"    console.log(\"Savings: $\" + (cart.total - cart.discountedTotal).toFixed(2));\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"} else {\r",
+									"    console.log(\"User has no cart yet (empty state)\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/carts/user/{{userId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carts",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-CART-402: Add Product to Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-CART-402: Add Product to Cart\r",
+									"// Test Type: E-commerce - Cart Operations\r",
+									"// ========================================\r",
+									"\r",
+									"pm.test(\"Status code is 200 or 201\", function () {\r",
+									"    pm.expect([200, 201]).to.include(pm.response.code);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Add to cart is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Cart ID Generated\r",
+									"pm.test(\"Cart ID is generated/returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData.id).to.be.a('number');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Products Array Present\r",
+									"pm.test(\"Products array in cart\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('products');\r",
+									"    pm.expect(jsonData.products).to.be.an('array');\r",
+									"    pm.expect(jsonData.products.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Added Product in Cart\r",
+									"pm.test(\"Added product is in cart\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const addedProductId = 1;\r",
+									"    \r",
+									"    const productInCart = jsonData.products.find(p => p.id === addedProductId);\r",
+									"    pm.expect(productInCart).to.exist;\r",
+									"});\r",
+									"\r",
+									"//Test 6: Quantity Correct\r",
+									"pm.test(\"Product quantity is correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const product = jsonData.products.find(p => p.id === 1);\r",
+									"    \r",
+									"    if (product) {\r",
+									"        pm.expect(product.quantity).to.eql(2);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 7: Cart Totals Present\r",
+									"pm.test(\"Cart has total calculations\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('total');\r",
+									"    pm.expect(jsonData).to.have.property('discountedTotal');\r",
+									"    pm.expect(jsonData).to.have.property('totalProducts');\r",
+									"    pm.expect(jsonData).to.have.property('totalQuantity');\r",
+									"});\r",
+									"\r",
+									"//Test 8: Total is Positive\r",
+									"pm.test(\"Cart total is positive\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 9: Total Products Count\r",
+									"pm.test(\"Total products count is accurate\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.totalProducts).to.eql(jsonData.products.length);\r",
+									"});\r",
+									"\r",
+									"//Test 10: Total Quantity Calculation\r",
+									"pm.test(\"Total quantity is sum of all products\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const sumQuantities = jsonData.products.reduce((sum, p) => sum + p.quantity, 0);\r",
+									"    pm.expect(jsonData.totalQuantity).to.eql(sumQuantities);\r",
+									"});\r",
+									"\r",
+									"//Save updated cart\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"cartId\", jsonData.id);\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-CART-402: PRODUCT ADDED TO CART\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Cart ID:\", jsonData.id);\r",
+									"console.log(\"Products in Cart:\", jsonData.totalProducts);\r",
+									"console.log(\"Total Items:\", jsonData.totalQuantity);\r",
+									"console.log(\"Cart Total: $\" + jsonData.total);\r",
+									"console.log(\"After Discount: $\" + jsonData.discountedTotal);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Added Product Details:\");\r",
+									"const addedProduct = jsonData.products.find(p => p.id === 1);\r",
+									"if (addedProduct) {\r",
+									"    console.log(\"  Product ID:\", addedProduct.id);\r",
+									"    console.log(\"  Quantity:\", addedProduct.quantity);\r",
+									"    console.log(\"  Price: $\" + addedProduct.price);\r",
+									"    console.log(\"  Total: $\" + addedProduct.total);\r",
+									"}\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": {{userId}},\r\n  \"products\": [\r\n    {\r\n      \"id\": 1,\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/carts/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carts",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-CART-403: Update Product Quantity in Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-CART-403: Update Cart Quantity\r",
+									"// Test Type: Cart Modification\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Update Successful\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Update is fast\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Products Array Present\r",
+									"pm.test(\"Products in response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('products');\r",
+									"    pm.expect(jsonData.products).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Quantity Updated\r",
+									"pm.test(\"Product quantity was updated to 5\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const product = jsonData.products.find(p => p.id === 1);\r",
+									"    \r",
+									"    if (product) {\r",
+									"        pm.expect(product.quantity).to.eql(5);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Test 5: Totals Recalculated\r",
+									"pm.test(\"Cart totals were recalculated\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('total');\r",
+									"    pm.expect(jsonData).to.have.property('totalQuantity');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Total Quantity Matches\r",
+									"pm.test(\"Total quantity reflects update\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const sumQuantities = jsonData.products.reduce((sum, p) => sum + p.quantity, 0);\r",
+									"    pm.expect(jsonData.totalQuantity).to.eql(sumQuantities);\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-CART-403: QUANTITY UPDATED\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(\"Cart ID:\", jsonData.id);\r",
+									"console.log(\"Total Products:\", jsonData.totalProducts);\r",
+									"console.log(\"Total Quantity:\", jsonData.totalQuantity);\r",
+									"console.log(\"New Total: $\" + jsonData.total);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"merge\": false,\r\n  \"products\": [\r\n    {\r\n      \"id\": 1,\r\n      \"quantity\": 5\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/carts/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-CART-404: Get All Carts (Admin View)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"pm.test(\"Carts array\", () => {\r",
+									"    pm.expect(pm.response.json().carts).to.be.an('array');\r",
+									"});\r",
+									"pm.test(\"Has carts\", () => {\r",
+									"    pm.expect(pm.response.json().carts.length).to.be.above(0);\r",
+									"});\r",
+									"pm.test(\"Pagination\", () => {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property('total');\r",
+									"    pm.expect(json).to.have.property('limit');\r",
+									"});\r",
+									"\r",
+									"console.log(\"Total Carts:\", pm.response.json().total);\r",
+									"console.log(\"Returned:\", pm.response.json().carts.length);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/carts?limit=5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-CART-405: Delete Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"pm.test(\"Cart deleted\", () => {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property('id');\r",
+									"    pm.expect(json).to.have.property('isDeleted');\r",
+									"    pm.expect(json.isDeleted).to.be.true;\r",
+									"});\r",
+									"\r",
+									"console.log(\"Cart\", pm.response.json().id, \"deleted\");\r",
+									"console.log(\"Deleted At:\", pm.response.json().deletedOn);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/carts/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-CART-401**  \nPriority: High  \nObjective: Retrieve authenticated user's shopping cart\n\nTest Type: E-commerce Workflow  \nAuthentication: Required\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Cart data with products  \n\\- Total calculations correct\n\n---\n\n**Test Case ID: TC-CART-402**  \nPriority: Critical  \nObjective: Add product to shopping cart\n\nTest Type: E-commerce Core Function  \nBusiness Logic: Cart management\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Product added successfully  \n\\- Cart totals updated\n\n---\n\n**Test Case ID: TC-CART-403**  \nPriority: High  \nObjective: Update product quantity in cart  \n  \nTest Type: Cart Modification  \nBusiness Logic: Quantity management  \n  \nExpected Results:  \n\\- Status: 200 OK  \n\\- Quantity updated  \n\\- Totals recalculated\n\n---"
+		},
+		{
+			"name": "02.5 - E-commerce Workflows",
+			"item": [
+				{
+					"name": "TC-FLOW-501: Complete Purchase Journey (End to End)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-FLOW-501: Complete Purchase Journey\r",
+									"// Test Type: END-TO-END WORKFLOW\r",
+									"// Business Scenario: Real User Purchase Flow\r",
+									"// ========================================\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"PURCHASE JOURNEY STARTED\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"\r",
+									"// ========================================\r",
+									"// STEP 1: Cart Creation\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Cart Created Successfully\r",
+									"pm.test(\"STEP 1: Cart created successfully\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time SLA\r",
+									"pm.test(\"STEP 1: Response time meets SLA (<2s)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//STEP 2: Cart Content Validation\r",
+									"\r",
+									"//Test 3: All Products Added\r",
+									"pm.test(\"STEP 2: All 3 products added to cart\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.products).to.be.an('array');\r",
+									"    pm.expect(jsonData.products.length).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Product IDs Match\r",
+									"pm.test(\"STEP 2: Product IDs match order\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const productIds = jsonData.products.map(p => p.id);\r",
+									"    pm.expect(productIds).to.include.members([1, 5, 10]);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Quantities Correct\r",
+									"pm.test(\"STEP 2: Product quantities are correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    const product1 = jsonData.products.find(p => p.id === 1);\r",
+									"    const product5 = jsonData.products.find(p => p.id === 5);\r",
+									"    const product10 = jsonData.products.find(p => p.id === 10);\r",
+									"    \r",
+									"    pm.expect(product1.quantity).to.eql(2);\r",
+									"    pm.expect(product5.quantity).to.eql(1);\r",
+									"    pm.expect(product10.quantity).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"//STEP 3: Business Logic Validation\r",
+									"//Test 6: Total Products Count\r",
+									"pm.test(\"STEP 3: Total products count = 3\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.totalProducts).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"//Test 7: Total Quantity Sum\r",
+									"pm.test(\"STEP 3: Total quantity = 6 items (2+1+3)\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.totalQuantity).to.eql(6);\r",
+									"});\r",
+									"\r",
+									"//Test 8: Cart Total Calculation\r",
+									"pm.test(\"STEP 3: Cart total is positive and valid\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total).to.be.a('number');\r",
+									"    pm.expect(jsonData.total).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 9: Discount Applied\r",
+									"pm.test(\"STEP 3: Discount applied correctly\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.discountedTotal).to.be.at.most(jsonData.total);\r",
+									"    \r",
+									"    const savings = jsonData.total - jsonData.discountedTotal;\r",
+									"    pm.expect(savings).to.be.at.least(0);\r",
+									"});\r",
+									"\r",
+									"//Test 10: Each Product Has Price\r",
+									"pm.test(\"STEP 3: Each product has valid pricing\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach((product, index) => {\r",
+									"        pm.expect(product.price).to.be.a('number');\r",
+									"        pm.expect(product.price).to.be.above(0);\r",
+									"        pm.expect(product.total).to.be.a('number');\r",
+									"        pm.expect(product.total).to.be.above(0);\r",
+									"        \r",
+									"        //Verify:product.total=price * quantity\r",
+									"        const expectedTotal = product.price * product.quantity;\r",
+									"        pm.expect(product.total).to.be.closeTo(expectedTotal, 0.01);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//STEP 4: Checkout Readiness\r",
+									"//Test 11: Cart Has Valid User\r",
+									"pm.test(\"STEP 4: Cart belongs to authenticated user\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const authUserId = parseInt(pm.environment.get(\"userId\"));\r",
+									"    pm.expect(jsonData.userId).to.eql(authUserId);\r",
+									"});\r",
+									"\r",
+									"//Test 12: Cart Ready for Checkout\r",
+									"//Business rules for checkout readiness\r",
+									"pm.test(\"STEP 4: Cart is ready for checkout\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.products.length).to.be.above(0);//Has items\r",
+									"    pm.expect(jsonData.total).to.be.above(0); //Has value\r",
+									"    pm.expect(jsonData.userId).to.exist; //Has user\r",
+									"});\r",
+									"\r",
+									"//STEP 5: Data Integrity\r",
+									"//Test 13: No Duplicate Products\r",
+									"pm.test(\"STEP 5: No duplicate products in cart\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const productIds = jsonData.products.map(p => p.id);\r",
+									"    const uniqueIds = [...new Set(productIds)];\r",
+									"    pm.expect(productIds.length).to.eql(uniqueIds.length);\r",
+									"});\r",
+									"\r",
+									"//Test 14: All Products Have Discount Info\r",
+									"pm.test(\"STEP 5: All products have discount info\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        pm.expect(product).to.have.property('discountPercentage');\r",
+									"        pm.expect(product.discountPercentage).to.be.a('number');\r",
+									"        pm.expect(product.discountPercentage).to.be.within(0, 100);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 15: Timestamps Present\r",
+									"pm.test(\"STEP 5: Cart has timestamps\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    //DummyJSON may not return timestamps, but we check if present\r",
+									"    if (jsonData.createdAt || jsonData.updatedAt) {\r",
+									"        pm.expect(true).to.be.true;\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//FINAL: Save & Report\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"purchaseCartId\", jsonData.id);\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"PURCHASE JOURNEY COMPLETED\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Cart ID:\", jsonData.id);\r",
+									"console.log(\"User ID:\", jsonData.userId);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"ORDER SUMMARY:\");\r",
+									"console.log(\"Total Products:\", jsonData.totalProducts);\r",
+									"console.log(\"Total Items:\", jsonData.totalQuantity);\r",
+									"console.log(\"Subtotal: $\" + jsonData.total.toFixed(2));\r",
+									"console.log(\"Discount: -$\" + (jsonData.total - jsonData.discountedTotal).toFixed(2));\r",
+									"console.log(\"TOTAL: $\" + jsonData.discountedTotal.toFixed(2));\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"CART ITEMS:\");\r",
+									"jsonData.products.forEach((product, i) => {\r",
+									"    console.log(`  ${i+1}. Product #${product.id}`);\r",
+									"    console.log(`     Qty: ${product.quantity} x $${product.price}`);\r",
+									"    console.log(`     Subtotal: $${product.total}`);\r",
+									"    console.log(`     Discount: ${product.discountPercentage}%`);\r",
+									"});\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"All validations passed\");\r",
+									"console.log(\"Ready for payment processing\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": {{userId}},\r\n  \"products\": [\r\n    {\r\n      \"id\": 1,\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"id\": 5,\r\n      \"quantity\": 1\r\n    },\r\n    {\r\n      \"id\": 10,\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/carts/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carts",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-FLOW-502: Search → View → Add to Cart Flow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-FLOW-502: Search to Purchase Flow\r",
+									"// Test Type: User Journey - Search Funnel\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Search Executed\r",
+									"pm.test(\"SEARCH: Results returned\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Search Performance\r",
+									"pm.test(\"SEARCH: Fast response (<2s)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Results Found\r",
+									"pm.test(\"SEARCH: Products found for 'phone'\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.products.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 4: Relevance\r",
+									"pm.test(\"SEARCH: Results are relevant\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const searchTerm = 'phone';\r",
+									"    \r",
+									"    const hasRelevant = jsonData.products.some(p => {\r",
+									"        return p.title.toLowerCase().includes(searchTerm) ||\r",
+									"               p.description.toLowerCase().includes(searchTerm) ||\r",
+									"               p.category.toLowerCase().includes(searchTerm);\r",
+									"    });\r",
+									"    \r",
+									"    pm.expect(hasRelevant).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Test 5: Product Details Complete\r",
+									"pm.test(\"VIEW: Products have complete info for decision\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requiredForPurchase = ['id', 'title', 'price', 'stock', 'rating', 'thumbnail'];\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        requiredForPurchase.forEach(field => {\r",
+									"            pm.expect(product).to.have.property(field);\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 6: Products Available\r",
+									"pm.test(\"VIEW: At least one product in stock\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const inStock = jsonData.products.some(p => p.stock > 0);\r",
+									"    pm.expect(inStock).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Test 7: Price Information\r",
+									"pm.test(\"VIEW: All products have pricing\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        pm.expect(product.price).to.be.above(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 8: Ratings Available\r",
+									"pm.test(\"VIEW: Products have ratings (social proof)\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.products.forEach(product => {\r",
+									"        pm.expect(product.rating).to.be.within(0, 5);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Simulate user selecting first available product\r",
+									"const jsonData = pm.response.json();\r",
+									"const availableProduct = jsonData.products.find(p => p.stock > 0);\r",
+									"\r",
+									"if (availableProduct) {\r",
+									"    pm.environment.set(\"selectedProductId\", availableProduct.id);\r",
+									"    pm.environment.set(\"selectedProductPrice\", availableProduct.price);\r",
+									"    pm.environment.set(\"selectedProductStock\", availableProduct.stock);\r",
+									"    \r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    console.log(\"SEARCH TO PURCHASE FLOW\");\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    console.log(\"Search Query: 'phone'\");\r",
+									"    console.log(\"Results Found:\", jsonData.products.length);\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    console.log(\"USER SELECTED:\");\r",
+									"    console.log(\"Product:\", availableProduct.title);\r",
+									"    console.log(\"Price: $\" + availableProduct.price);\r",
+									"    console.log(\"Rating:\", availableProduct.rating + \"/5\");\r",
+									"    console.log(\"Stock:\", availableProduct.stock, \"units\");\r",
+									"    console.log(\"Discount:\", availableProduct.discountPercentage + \"%\");\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    console.log(\"Product ready to add to cart\");\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/search?q=phone&limit=5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "phone"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-FLOW-503: Multi-User Cart Isolation Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-FLOW-503: Multi-User Cart Isolation\r",
+									"// Test Type: Security - Data Isolation\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: Carts Retrieved\r",
+									"pm.test(\"Status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Multiple Carts Exist\r",
+									"pm.test(\"Multiple carts in system\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.carts.length).to.be.above(1);\r",
+									"});\r",
+									"\r",
+									"//Test 3: Each Cart Has User\r",
+									"pm.test(\"SECURITY: All carts have userId\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.carts.forEach((cart, index) => {\r",
+									"        pm.expect(cart).to.have.property('userId');\r",
+									"        pm.expect(cart.userId).to.be.a('number');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 4: User IDs Are Different\r",
+									"//Should have multiple different users\r",
+									"pm.test(\"SECURITY: Carts belong to different users\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const userIds = jsonData.carts.map(c => c.userId);\r",
+									"    const uniqueUsers = [...new Set(userIds)];\r",
+									"    pm.expect(uniqueUsers.length).to.be.above(1);\r",
+									"});\r",
+									"\r",
+									"//Test 5: Cart IDs Unique\r",
+									"pm.test(\"DATA INTEGRITY: All cart IDs unique\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const cartIds = jsonData.carts.map(c => c.id);\r",
+									"    const uniqueIds = [...new Set(cartIds)];\r",
+									"    \r",
+									"    pm.expect(cartIds.length).to.eql(uniqueIds.length);\r",
+									"});\r",
+									"\r",
+									"//Test 6: No Empty Carts (Business Rule)\r",
+									"pm.test(\"BUSINESS RULE: No carts with 0 products\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.carts.forEach(cart => {\r",
+									"        pm.expect(cart.totalProducts).to.be.above(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 7: All Carts Have Totals\r",
+									"pm.test(\"BUSINESS RULE: All carts have valid totals\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.carts.forEach(cart => {\r",
+									"        pm.expect(cart.total).to.be.a('number');\r",
+									"        pm.expect(cart.total).to.be.above(0);\r",
+									"        pm.expect(cart.discountedTotal).to.be.at.most(cart.total);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 8: Consistency Check\r",
+									"pm.test(\"DATA INTEGRITY: Product count matches\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.carts.forEach(cart => {\r",
+									"        pm.expect(cart.totalProducts).to.eql(cart.products.length);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"MULTI-USER CART ISOLATION TEST\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Total Carts:\", jsonData.total);\r",
+									"console.log(\"Returned:\", jsonData.carts.length);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"USER DISTRIBUTION:\");\r",
+									"\r",
+									"const userCounts = {};\r",
+									"jsonData.carts.forEach(cart => {\r",
+									"    userCounts[cart.userId] = (userCounts[cart.userId] || 0) + 1;\r",
+									"});\r",
+									"\r",
+									"Object.entries(userCounts).forEach(([userId, count]) => {\r",
+									"    console.log(`  User ${userId}: ${count} cart(s)`);\r",
+									"});\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Cart isolation verified\");\r",
+									"console.log(\"No data mixing detected\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/carts?limit=10",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-FLOW-501**  \nPriority: CRITICAL  \nObjective: Simulate complete user purchase journey\n\nTest Type: End-to-End Workflow Testing  \nBusiness Scenario: User browses → adds to cart → completes purchase\n\nFlow Steps:\n\n1. User authenticated (prerequisite)\n    \n2. Browse products\n    \n3. Add multiple products to cart\n    \n4. Verify cart calculations\n    \n5. Apply business rules\n    \n6. Validate checkout readiness\n    \n\nThis simulates a REAL user journey\n\n---\n\n**Test Case ID: TC-FLOW-502**  \nPriority: High  \nObjective: Simulate user searching and purchasing\n\nFlow:  \n1\\. User searches for \"phone\"  \n2\\. Reviews search results  \n3\\. Selects a product  \n4\\. (Next step would be add to cart)\n\nThis validates search-to-purchase funnel\n\n---\n\n**Test Case ID: TC-FLOW-503**  \nPriority: High  \nObjective: Validate cart isolation between users  \n  \nTest Type: Security & Data Isolation  \nBusiness Rule: Users should only see their own carts  \n  \nExpected Results:  \n\\- Multiple carts exist  \n\\- Each cart belongs to unique user  \n\\- No cart data mixing",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

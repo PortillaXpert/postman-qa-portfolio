@@ -1,0 +1,57 @@
+name: Postman API Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 9 * * *' # Ejecutar diariamente a las 9 AM UTC
+  workflow_dispatch: # Permitir ejecución manual
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run All Tests in Parallel
+        run: npm run test:all-parallel
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: newman-reports
+          path: newman/*.html
+
+      - name: Test Results Summary
+        if: always()
+        run: |
+          echo "API Tests Completed"
+          echo "Reports generated in 'newman/' folder"
+          echo "Download artifacts to view HTML reports"
+
+  notification:
+    needs: api-tests
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Test Status
+        run: |
+          if [ "${{ needs.api-tests.result }}" == "success" ]; then
+            echo "All API tests passed successfully."
+          else
+            echo "Some tests failed. Review the workflow logs and reports."
+          fi
