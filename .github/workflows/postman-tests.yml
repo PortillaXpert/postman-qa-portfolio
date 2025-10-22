@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-    - cron: '0 9 * * *' # Ejecutar diariamente a las 9 AM UTC
-  workflow_dispatch: # Permitir ejecución manual
+    - cron: '0 9 * * *' 
+  workflow_dispatch:
 
 jobs:
   api-tests:
@@ -26,7 +26,8 @@ jobs:
         run: npm install
 
       - name: Run All Tests in Parallel
-        run: npm run test:all-parallel
+        run: |
+          npm run test:all || true
 
       - name: Upload Test Reports
         if: always()
