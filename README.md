@@ -126,6 +126,9 @@ Demonstrates validation of complex nested data structures, response timing, and 
   <a class="badge" href="https://www.javascript.com/" target="_blank">
     <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
   </a>
+  <a class="badge" href="https://github.com/PortillaXpert/postman-qa-portfolio/actions" target="_blank">
+  <img src="https://img.shields.io/github/actions/workflow/status/PortillaXpert/postman-qa-portfolio/postman-tests.yml?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
+</a>
 </div>
 
 ---
