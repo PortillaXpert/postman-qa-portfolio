@@ -34,13 +34,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: newman-reports
-          path: newman/*.html
+          path: newman-reports/*.html
 
       - name: Test Results Summary
         if: always()
         run: |
           echo "API Tests Completed"
-          echo "Reports generated in 'newman/' folder"
+          echo "Reports generated in 'newman-reports/' folder"
           echo "Download artifacts to view HTML reports"
 
   notification:
