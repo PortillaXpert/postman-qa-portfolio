@@ -162,7 +162,8 @@ Demonstrates validation of complex nested data structures, response timing, and 
 | ReqRes API | 23 | 121+ | 187+ | 100% CRUD |
 | DummyJSON E-commerce | 26 | 186+ | 220+ | End-to-End Workflows |
 | Contract Testing | 3 | 70+ | 100+ | Schema Compliance |
-| GraphQL Testing | – | – | – | Query & Mutation Validation |
+| GraphQL Testing | 5 | 29+ | 45+ | Query & Mutation Validation |
+
 
 ---
 
