@@ -107,28 +107,34 @@ Demonstrates validation of complex nested data structures, response timing, and 
 ---
 
 <h2 id="technologies">Technologies Used</h2>
-<div class="badge-container">
-  <a class="badge" href="https://www.postman.com/" target="_blank">
+
+<div align="center">
+
+  <!--Main Tools-->
+  <a href="https://www.postman.com/" target="_blank">
     <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white" alt="Postman" />
   </a>
-  <a class="badge" href="https://nodejs.org/" target="_blank">
-    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+  <a href="https://nodejs.org/" target="_blank">
+    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
   </a>
-  <a class="badge" href="https://www.npmjs.com/package/newman" target="_blank">
+  <a href="https://www.npmjs.com/package/newman" target="_blank">
     <img src="https://img.shields.io/badge/Newman-000000?style=for-the-badge&logo=npm&logoColor=white" alt="Newman" />
   </a>
-  <a class="badge" href="https://ajv.js.org/" target="_blank">
+  <a href="https://ajv.js.org/" target="_blank">
     <img src="https://img.shields.io/badge/AJV-004880?style=for-the-badge&logo=json&logoColor=white" alt="AJV" />
   </a>
-  <a class="badge" href="https://graphql.org/" target="_blank">
+  <a href="https://graphql.org/" target="_blank">
     <img src="https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white" alt="GraphQL" />
   </a>
-  <a class="badge" href="https://www.javascript.com/" target="_blank">
+  <a href="https://www.javascript.com/" target="_blank">
     <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
   </a>
-  <a class="badge" href="https://github.com/PortillaXpert/postman-qa-portfolio/actions" target="_blank">
-  <img src="https://img.shields.io/github/actions/workflow/status/PortillaXpert/postman-qa-portfolio/postman-tests.yml?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
-</a>
+
+  <!--Pipeline State-->
+  <a href="https://github.com/PortillaXpert/postman-qa-portfolio/actions" target="_blank">
+    <img src="https://img.shields.io/github/actions/workflow/status/PortillaXpert/postman-qa-portfolio/postman-tests.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI%20Tests&color=2088FF" alt="GitHub Actions" />
+  </a>
+
 </div>
 
 ---

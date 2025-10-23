@@ -2,12 +2,17 @@
   "name": "postman-qa-portfolio",
   "version": "1.0.0",
   "description": "Professional QA Automation Portfolio - API Testing",
-  "scripts": {
+ "scripts": {
   "test:reqres": "newman run \"collections/01 - ReqRes API Testing.postman_collection.json\" -e \"environments/ReqRes - Production.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman-reports/ReqRes_Report.html --reporter-htmlextra-title \"ReqRes API - Automated Test Report\" --reporter-htmlextra-browserTitle \"ReqRes API Testing\" --reporter-htmlextra-titleSize 4 --reporter-htmlextra-showEnvironmentData",
+
   "test:dummyjson": "newman run \"collections/02 - DummyJSON E-commerce - Complete Testing.postman_collection.json\" -e \"environments/DummyJSON - Production.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman-reports/DummyJSON_Report.html --reporter-htmlextra-title \"DummyJSON E-commerce - Full QA Automation Report\" --reporter-htmlextra-browserTitle \"DummyJSON QA Report\" --reporter-htmlextra-titleSize 4 --reporter-htmlextra-showEnvironmentData",
+
   "test:contract": "newman run \"collections/03 - Contract Testing & JSON Schema Validation.postman_collection.json\" -e \"environments/DummyJSON - Production.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman-reports/Contract_Report.html --reporter-htmlextra-title \"Contract Testing & Schema Validation Report\" --reporter-htmlextra-browserTitle \"Contract Testing Report\" --reporter-htmlextra-titleSize 4 --reporter-htmlextra-showEnvironmentData",
-  "test:all-parallel": "concurrently \"npm run test:reqres\" \"npm run test:dummyjson\" \"npm run test:contract\""
-  },
+
+  "test:graphql": "newman run \"collections/04 - GraphQL API Testing.postman_collection.json\" -e \"environments/GraphQL - SpaceX.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman-reports/GraphQL_Report.html --reporter-htmlextra-title \"GraphQL API - SpaceX Data Testing Report\" --reporter-htmlextra-browserTitle \"GraphQL API Testing\" --reporter-htmlextra-titleSize 4 --reporter-htmlextra-showEnvironmentData",
+
+  "test:all-parallel": "concurrently \"npm run test:reqres\" \"npm run test:dummyjson\" \"npm run test:contract\" \"npm run test:graphql\""
+},
 
   "keywords": [
     "api-testing",

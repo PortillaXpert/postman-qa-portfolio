@@ -27,7 +27,7 @@ jobs:
 
       - name: Run All Tests in Parallel
         run: |
-          npm run test:all || true
+          npm run test:all-parallel || true
 
       - name: Upload Test Reports
         if: always()

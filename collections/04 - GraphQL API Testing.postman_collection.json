@@ -1,0 +1,509 @@
+{
+	"info": {
+		"_postman_id": "ca18a1ad-a4b2-4f4e-a41e-7480f64dccf3",
+		"name": "04 - GraphQL API Testing",
+		"description": "## Overview\n\nComprehensive Postman collection designed for **GraphQL API testing and validation**, focused on query integrity, variable handling, nested structures, and error management.\n\nThis suite demonstrates advanced **GraphQL testing practices** — covering query correctness, response consistency, and schema compliance using real-world data from the **SpaceX GraphQL API**.\n\n---\n\n## What This Collection Demonstrates\n\n### **Technical Scope**\n\n- GraphQL **query and mutation validation**\n    \n- Testing queries with **variables and aliases**\n    \n- **Nested object assertions** (rocket → engines → payloads)\n    \n- Performance and response-time validations\n    \n- Dynamic variable extraction between queries\n    \n- Validation of **GraphQL errors, structure, and null safety**\n    \n- Console-based structured reporting\n    \n\n### **Business Domains Covered**\n\n- SpaceX rockets and launch data retrieval\n    \n- Cost, success rate, and engine specification validation\n    \n- Multi-query and alias-based comparisons\n    \n- Error and edge-case response handling\n    \n\n---\n\n## Collection Summary\n\n| **Module** | **Requests** | **Tests** | **Coverage** |\n| --- | --- | --- | --- |\n| TC-GRAPHQL-701 – Simple Query | 1 | 10 | Basic GraphQL validation |\n| TC-GRAPHQL-702 – Query with Variables | 1 | 6 | Parameterized query testing |\n| TC-GRAPHQL-703 – Multiple Queries with Aliases | 1 | 3 | Alias & multi-response handling |\n| TC-GRAPHQL-704 – Launches with Nested Data | 1 | 6 | Deep object and array validation |\n| TC-GRAPHQL-705 – Error Handling | 1 | 4 | Negative path and resilience checks |\n| **TOTAL** | **5** | **29+** | Complete GraphQL validation workflow |\n\n---\n\n## Usage Guide\n\n### **Prerequisites**\n\n1. Import collection: **04 – GraphQL API Testing**\n    \n2. Environment: **SpaceX GraphQL – Public**\n    \n3. Variable: rocketId (set dynamically from TC-GRAPHQL-701)\n    \n4. [https://api.spacex.land/graphql/](https://api.spacex.land/graphql/)\n    \n\n### **Execution Options**\n\n- Run individual tests or execute the full folder for sequential validation.\n    \n- Logs and extracted variables are printed to the **Postman Console** for traceability.\n    \n\n---\n\n## Key Test Coverage\n\n### **TC-GRAPHQL-701 — Simple GraphQL Query**\n\n- HTTP 200 and response time checks (<3s)\n    \n- No GraphQL errors present\n    \n- Valid data object and non-empty rockets array\n    \n- Required rocket fields: id, name, type, company, active\n    \n- Nested object validation (height, mass, engines)\n    \n- Boolean and numeric field boundaries\n    \n- Environment variable set: rocketId\n    \n- Console output summary of all retrieved rockets\n    \n\n---\n\n### **TC-GRAPHQL-702 — Query with Variables**\n\n- Variable-based GraphQL query execution\n    \n- No errors in response\n    \n- Valid rocket object structure\n    \n- Complete nested object validation (payload_weights, engines)\n    \n- Console summary of rocket attributes and engine details\n    \n\n---\n\n### **TC-GRAPHQL-703 — Multiple Queries with Aliases**\n\n- Execution of multiple queries (falcon9, falconHeavy, starship)\n    \n- Validation of alias correctness and data separation\n    \n- Cost-per-launch validation for all rockets\n    \n- Console table comparison for cost, type, and activity status\n    \n\n---\n\n### **TC-GRAPHQL-704 — Get Launches with Nested Data**\n\n- Retrieval of launches array\n    \n- Validation of nested rocket and launch_site data\n    \n- Conditional validation when launch is null\n    \n- Verification of links presence and launch_success type safety\n    \n- Dynamic environment variable: launchId\n    \n- Console output with latest launch summaries\n    \n\n---\n\n### **TC-GRAPHQL-705 — Error Handling**\n\n- Response status 400 for malformed query\n    \n- Presence of errors array and descriptive message field\n    \n- data field is null or missing on failure\n    \n- Console output summarizing error count and messages\n    \n\n---\n\n## Test Automation Techniques\n\n**Basic Query Validation**\n\n``` javascript\npm.test(\"Status 200\", () => pm.response.to.have.status(200));\npm.test(\"GRAPHQL: No errors\", () => {\n    const jsonData = pm.response.json();\n    pm.expect(jsonData).to.not.have.property('errors');\n});\n\n ```\n\n**Aliased Multi-Query Assertions**\n\n``` javascript\nconst data = pm.response.json().data;\npm.expect(data.falcon9.name).to.include('Falcon 9');\npm.expect(data.starship.active).to.be.a('boolean');\n\n ```\n\n**Nested Object Validation**\n\n``` javascript\njsonData.data.launches.forEach(launch => {\n    pm.expect(launch.rocket).to.have.property('rocket_name');\n    pm.expect(launch.launch_site.site_name).to.be.a('string');\n});\n\n ```\n\n**Error Response Verification**\n\n``` javascript\npm.expect(jsonData).to.have.property('errors');\npm.expect(jsonData.errors[0].message).to.be.a('string');\n\n ```\n\n---\n\n## Design Techniques (ISTQB-Aligned)\n\n- **Equivalence Partitioning:** Valid vs invalid GraphQL query structures\n    \n- **Boundary Value Analysis:** Response time and numeric validations\n    \n- **Decision Table Testing:** Aliased response comparison logic\n    \n- **Error Guessing:** Malformed queries and null nested objects\n    \n- **Use Case Testing:** Rocket details, launches, and relationships\n    \n\n---\n\n## Quality & Compliance\n\n- GraphQL-specific contract validation\n    \n- Nested object safety and field completeness\n    \n- Dynamic ID handling between queries\n    \n- Structured console output for regression readability\n    \n\n---\n\n## Author\n\n**Juan Pablo Portilla**\n\nQA Automation Engineer\n\nGitHub: [PortillaXpert](https://github.com/PortillaXpert)\n\nLinkedIn: [Juan Pablo Rivera](https://www.linkedin.com/in/juan-pablo-rivera-a90335374)\n\n---\n\n## Version History\n\n**v1.0 – October 2025**\n\nInitial release of GraphQL API Testing module\n\nIncludes 5 test cases, 29+ assertions, and complete validation of SpaceX data queries",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33194388",
+		"_collection_link": "https://www.postman.com/personal-qa-workspace/workspace/qa-portfolio/collection/33194388-ca18a1ad-a4b2-4f4e-a41e-7480f64dccf3?action=share&source=collection_link&creator=33194388"
+	},
+	"item": [
+		{
+			"name": "04.1 - Queries (GET data)",
+			"item": [
+				{
+					"name": "TC-GRAPHQL-701: Get All Rockets (Simple Query)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GRAPHQL-701: Simple GraphQL Query\r",
+									"// Test Type: GraphQL - Query Validation\r",
+									"// ========================================\r",
+									"\r",
+									"//Test 1: HTTP Status OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Test 2: Response Time\r",
+									"pm.test(\"Response time acceptable\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"//Test 3: No GraphQL Errors\r",
+									"pm.test(\"GRAPHQL: No errors in response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('errors');\r",
+									"});\r",
+									"\r",
+									"//Test 4: Data Object Present\r",
+									"pm.test(\"GRAPHQL: Data object present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('data');\r",
+									"});\r",
+									"\r",
+									"//Test 5: Rockets Array Present\r",
+									"pm.test(\"GRAPHQL: Rockets array returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.have.property('rockets');\r",
+									"    pm.expect(jsonData.data.rockets).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"//Test 6: Rockets Not Empty\r",
+									"pm.test(\"GRAPHQL: Rockets data not empty\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.rockets.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"//Test 7: Rocket Structure Complete\r",
+									"pm.test(\"GRAPHQL: Each rocket has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const requiredFields = ['id', 'name', 'type', 'active', 'company'];\r",
+									"    \r",
+									"    jsonData.data.rockets.forEach(rocket => {\r",
+									"        requiredFields.forEach(field => {\r",
+									"            pm.expect(rocket).to.have.property(field);\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 8: Nested Objects Present\r",
+									"pm.test(\"GRAPHQL: Nested objects (height, mass, engines) present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const firstRocket = jsonData.data.rockets[0];\r",
+									"    \r",
+									"    pm.expect(firstRocket).to.have.property('height');\r",
+									"    pm.expect(firstRocket).to.have.property('mass');\r",
+									"    pm.expect(firstRocket).to.have.property('engines');\r",
+									"});\r",
+									"\r",
+									"//Test 9: Active Boolean Valid\r",
+									"pm.test(\"GRAPHQL: Active field is boolean\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.rockets.forEach(rocket => {\r",
+									"        pm.expect(rocket.active).to.be.a('boolean');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Test 10: Cost Valid\r",
+									"pm.test(\"GRAPHQL: Cost per launch is positive\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.rockets.forEach(rocket => {\r",
+									"        if (rocket.cost_per_launch !== null) {\r",
+									"            pm.expect(rocket.cost_per_launch).to.be.above(0);\r",
+									"        }\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Save first rocket ID for next queries\r",
+									"const jsonData = pm.response.json();\r",
+									"if (jsonData.data.rockets.length > 0) {\r",
+									"    const firstRocket = jsonData.data.rockets[0];\r",
+									"    pm.environment.set(\"rocketId\", firstRocket.id);\r",
+									"}\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"TC-GRAPHQL-701: ROCKETS QUERY\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"Total Rockets:\", jsonData.data.rockets.length);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"jsonData.data.rockets.forEach((rocket, i) => {\r",
+									"    console.log(`${i+1}. ${rocket.name} (${rocket.type})`);\r",
+									"    console.log(`   Active: ${rocket.active}`);\r",
+									"    console.log(`   Cost: $${rocket.cost_per_launch?.toLocaleString() || 'N/A'}`);\r",
+									"    console.log(`   Success Rate: ${rocket.success_rate_pct}%`);\r",
+									"});\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetAllRockets {\r\n  rockets {\r\n    id\r\n    name\r\n    type\r\n    active\r\n    stages\r\n    boosters\r\n    cost_per_launch\r\n    success_rate_pct\r\n    first_flight\r\n    country\r\n    company\r\n    height {\r\n      meters\r\n      feet\r\n    }\r\n    diameter {\r\n      meters\r\n      feet\r\n    }\r\n    mass {\r\n      kg\r\n      lb\r\n    }\r\n    engines {\r\n      number\r\n      type\r\n      version\r\n    }\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphqlURL}}",
+							"host": [
+								"{{graphqlURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GRAPHQL-702: Get Single Rocket by ID (Variables)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ========================================\r",
+									"// TC-GRAPHQL-702: Query with Variables\r",
+									"// ========================================\r",
+									"\r",
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"\r",
+									"pm.test(\"GRAPHQL: No errors\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.have.property('errors');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Rocket data returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.have.property('rocket');\r",
+									"    pm.expect(jsonData.data.rocket).to.not.be.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Complete rocket details\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const rocket = jsonData.data.rocket;\r",
+									"    \r",
+									"    pm.expect(rocket).to.have.property('name');\r",
+									"    pm.expect(rocket).to.have.property('type');\r",
+									"    pm.expect(rocket).to.have.property('active');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Nested payload_weights array\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.rocket.payload_weights).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Engines object complete\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const engines = jsonData.data.rocket.engines;\r",
+									"    \r",
+									"    if (engines) {\r",
+									"        pm.expect(engines).to.have.property('number');\r",
+									"        pm.expect(engines).to.have.property('type');\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"//Safe console logging\r",
+									"const rocket = pm.response.json().data.rocket;\r",
+									"\r",
+									"if (rocket) {\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    console.log(\"ROCKET DETAILS:\", rocket.name);\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    console.log(\"Type:\", rocket.type);\r",
+									"    console.log(\"Active:\", rocket.active);\r",
+									"    console.log(\"Cost: $\" + (rocket.cost_per_launch?.toLocaleString() || 'N/A'));\r",
+									"    console.log(\"Success Rate:\", (rocket.success_rate_pct || 'N/A') + \"%\");\r",
+									"    console.log(\"First Flight:\", rocket.first_flight || 'N/A');\r",
+									"    console.log(\"Stages:\", rocket.stages || 'N/A');\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"    \r",
+									"    if (rocket.engines) {\r",
+									"        console.log(\"ENGINES:\");\r",
+									"        console.log(\"  Number:\", rocket.engines.number || 'N/A');\r",
+									"        console.log(\"  Type:\", rocket.engines.type || 'N/A');\r",
+									"        console.log(\"  Fuel:\", (rocket.engines.propellant_1 || 'N/A'), \"+\", (rocket.engines.propellant_2 || 'N/A'));\r",
+									"    }\r",
+									"    console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"} else {\r",
+									"    console.log(\"Rocket not found\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"if (!pm.environment.get(\"rocketId\")) {\r",
+									"    console.warn(\"Environment variable 'rocketId' is not set.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetRocketById($rocketId: ID!) {\r\n  rocket(id: $rocketId) {\r\n    id\r\n    name\r\n    type\r\n    active\r\n    stages\r\n    boosters\r\n    cost_per_launch\r\n    success_rate_pct\r\n    first_flight\r\n    wikipedia\r\n    description\r\n    height {\r\n      meters\r\n      feet\r\n    }\r\n    diameter {\r\n      meters\r\n      feet\r\n    }\r\n    mass {\r\n      kg\r\n      lb\r\n    }\r\n    payload_weights {\r\n      id\r\n      name\r\n      kg\r\n      lb\r\n    }\r\n    engines {\r\n      number\r\n      type\r\n      version\r\n      layout\r\n      propellant_1\r\n      propellant_2\r\n    }\r\n  }\r\n}",
+								"variables": "{\r\n  \"rocketId\": \"5e9d0d95eda69973a809d1ec\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphqlURL}}",
+							"host": [
+								"{{graphqlURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GRAPHQL-703: Multiple Queries with Aliases",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"\r",
+									"pm.test(\"GRAPHQL: All 3 rockets returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.have.property('falcon9');\r",
+									"    pm.expect(jsonData.data).to.have.property('falconHeavy');\r",
+									"    pm.expect(jsonData.data).to.have.property('starship');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Aliases work correctly\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.falcon9.name).to.include('Falcon 9');\r",
+									"    pm.expect(jsonData.data.falconHeavy.name).to.include('Falcon Heavy');\r",
+									"    pm.expect(jsonData.data.starship.name).to.include('Starship');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Cost comparison data available\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const rockets = [jsonData.data.falcon9, jsonData.data.falconHeavy, jsonData.data.starship];\r",
+									"    \r",
+									"    rockets.forEach(rocket => {\r",
+									"        pm.expect(rocket).to.have.property('cost_per_launch');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"const data = pm.response.json().data;\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"SPACEX ROCKETS COMPARISON\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"1.\", data.falcon9.name);\r",
+									"console.log(\"   Cost: $\" + (data.falcon9.cost_per_launch?.toLocaleString() || 'N/A'));\r",
+									"console.log(\"   Active:\", data.falcon9.active);\r",
+									"console.log(\"\");\r",
+									"console.log(\"2.\", data.falconHeavy.name);\r",
+									"console.log(\"   Cost: $\" + (data.falconHeavy.cost_per_launch?.toLocaleString() || 'N/A'));\r",
+									"console.log(\"   Active:\", data.falconHeavy.active);\r",
+									"console.log(\"\");\r",
+									"console.log(\"3.\", data.starship.name);\r",
+									"console.log(\"   Cost: $\" + (data.starship.cost_per_launch?.toLocaleString() || 'N/A'));\r",
+									"console.log(\"   Active:\", data.starship.active);\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query MultipleRockets {\r\n  falcon9: rocket(id: \"5e9d0d95eda69973a809d1ec\") {\r\n    id\r\n    name\r\n    type\r\n    active\r\n    cost_per_launch\r\n  }\r\n  \r\n  falconHeavy: rocket(id: \"5e9d0d95eda69974db09d1ed\") {\r\n    id\r\n    name\r\n    type\r\n    active\r\n    cost_per_launch\r\n  }\r\n  \r\n  starship: rocket(id: \"5e9d0d96eda699382d09d1ee\") {\r\n    id\r\n    name\r\n    type\r\n    active\r\n    cost_per_launch\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphqlURL}}",
+							"host": [
+								"{{graphqlURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GRAPHQL-704: Get Launches with Nested Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Launches array returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.launches).to.be.an('array');\r",
+									"    pm.expect(jsonData.data.launches.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Each launch has nested rocket data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.launches.forEach(launch => {\r",
+									"        pm.expect(launch).to.have.property('rocket');\r",
+									"        pm.expect(launch.rocket).to.have.property('rocket_name');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Each launch has nested site data if present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    jsonData.data.launches.forEach(launch => {\r",
+									"        pm.expect(launch).to.have.property('launch_site');\r",
+									"        if (launch.launch_site !== null) {\r",
+									"            pm.expect(launch.launch_site).to.have.property('site_name');\r",
+									"        } else {\r",
+									"            console.warn(`Launch \"${launch.mission_name}\" has null launch_site`);\r",
+									"        }\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Links object present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.launches.forEach(launch => {\r",
+									"        pm.expect(launch).to.have.property('links');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Launch success is boolean or null\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    \r",
+									"    jsonData.data.launches.forEach(launch => {\r",
+									"        if (launch.launch_success !== null) {\r",
+									"            pm.expect(launch.launch_success).to.be.a('boolean');\r",
+									"        }\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"//Save first launch ID\r",
+									"const launches = pm.response.json().data.launches;\r",
+									"if (launches.length > 0) {\r",
+									"    pm.environment.set(\"launchId\", launches[0].id);\r",
+									"}\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"RECENT SPACEX LAUNCHES\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"launches.slice(0, 5).forEach((launch, i) => {\r",
+									"    console.log(`${i+1}. ${launch.mission_name}`);\r",
+									"    console.log(`   Rocket: ${launch.rocket?.rocket_name || 'N/A'}`);\r",
+									"    console.log(`   Site: ${launch.launch_site?.site_name || 'N/A'}`);\r",
+									"    console.log(`   Success: ${launch.launch_success !== null ? (launch.launch_success ? 'Check' : 'X') : 'Pending'}`);\r",
+									"    console.log(`   Date: ${launch.launch_date_utc ? new Date(launch.launch_date_utc).toLocaleDateString() : 'Unknown'}`);\r",
+									"    console.log(\"\");\r",
+									"});\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetLaunches {\r\n  launches(limit: 10) {\r\n    id\r\n    mission_name\r\n    launch_date_utc\r\n    launch_success\r\n    details\r\n    rocket {\r\n      rocket_name\r\n      rocket_type\r\n    }\r\n    launch_site {\r\n      site_name\r\n      site_name_long\r\n    }\r\n    links {\r\n      mission_patch\r\n      article_link\r\n      video_link\r\n      wikipedia\r\n    }\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphqlURL}}",
+							"host": [
+								"{{graphqlURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC-GRAPHQL-705: Error Handling",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"GRAPHQL: Error response returns 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Errors array present\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('errors');\r",
+									"    pm.expect(jsonData.errors).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Error message is descriptive\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0]).to.have.property('message');\r",
+									"    pm.expect(jsonData.errors[0].message).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"GRAPHQL: Data is null or missing on error\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    if ('data' in jsonData) {\r",
+									"        pm.expect(jsonData.data).to.be.null;\r",
+									"    } else {\r",
+									"        console.warn(\"'data' field is missing entirely (expected in error response)\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"console.log(\"GRAPHQL ERROR HANDLING TEST\");\r",
+									"console.log(\"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\");\r",
+									"const errors = pm.response.json().errors;\r",
+									"console.log(\"Errors detected:\", errors.length);\r",
+									"errors.forEach((error, i) => {\r",
+									"    console.log(`${i+1}. ${error.message}`);\r",
+									"});\r",
+									"console.log(\"Error handling working correctly\");"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query InvalidQuery {\r\n  rocket(id: \"invalid_id_12345\") {\r\n    id\r\n    name\r\n    nonExistentField\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphqlURL}}",
+							"host": [
+								"{{graphqlURL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Test Case ID: TC-GRAPHQL-701**  \nPriority: High  \nObjective: Execute basic GraphQL query\n\nTest Type: GraphQL Query Validation\n\nExpected Results:  \n\\- Status: 200 OK  \n\\- Rockets data returned  \n\\- No GraphQL errors\n\n---\n\n**Test Case ID: TC-GRAPHQL-702**  \nPriority: Critical  \nObjective: Validate that the GraphQL endpoint returns complete and accurate rocket data when queried by ID using variables.  \nTest Type: Functional Testing  \nTechnique: GraphQL Query Validation\n\nExpected Results:\n\n- Response status is 200 OK\n    \n- No errors field in response\n    \n- Response includes data.rocket object\n    \n- Rocket object contains name, type, and active fields\n    \n- payload_weights field is an array\n    \n- engines object includes number and type properties\n    \n- Console logs display all relevant rocket details\n    \n\n---\n\n**Test Case ID: TC-GRAPHQL-703**  \nPriority: High  \nObjective: Validate that multiple GraphQL queries using aliases return distinct rocket data for comparison.  \nTest Type: Functional Testing  \nTechnique: Multi-Query Alias Validation\n\nExpected Results:\n\n- Response status is 200 OK\n    \n- Response includes falcon9, falconHeavy, and starship data objects\n    \n- Each alias returns the correct rocket name and details\n    \n- Each rocket includes cost_per_launch field\n    \n- Console logs show cost and active status comparison among rockets\n    \n\n---  \n\n**Test Case ID: TC-GRAPHQL-704**  \nPriority: High  \nObjective: Validate that the GraphQL query returns recent SpaceX launches with correctly structured nested data.  \nTest Type: Functional Testing  \nTechnique: Nested Object Validation\n\nExpected Results:\n\n- Response status is 200 OK\n    \n- Response includes launches array with one or more items\n    \n- Each launch contains nested rocket and launch_site objects\n    \n- rocket includes rocket_name\n    \n- launch_site includes site_name (if not null)\n    \n- Each launch includes links object\n    \n- launch_success is boolean or null\n    \n- The first launch ID is saved to environment variable\n    \n- Console output lists recent launches with relevant details\n    \n\n---\n\n**Test Case ID: TC-GRAPHQL-705**  \nPriority: Critical  \nObjective: Validate GraphQL API error response structure and handling when invalid queries are sent.  \nTest Type: Negative Testing  \nTechnique: Error Response Validation\n\nExpected Results:\n\n- Response status is 400 Bad Request\n    \n- Response body includes errors array\n    \n- Each error object includes a descriptive message field\n    \n- data field is null or missing entirely\n    \n- Console log displays total errors and corresponding messages"
+		}
+	]
+}
